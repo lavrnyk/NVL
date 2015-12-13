@@ -48,17 +48,4 @@ public class NumberConverter {
       return d;
     }*/
     
-    public static void main(String[] ars) {
-    
-       System.out.println(toString(12345));
-       System.out.println(toString(1));
-       System.out.println(toInt("-1"));
-       System.out.println(toInt("12345"));
-       System.out.println(toInt("-12345"));
-       
-       System.out.println(123%100);
-       System.out.println(Math.floorDiv(123,100));
-       
-    }
-    
 }
