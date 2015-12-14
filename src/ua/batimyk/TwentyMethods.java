@@ -16,9 +16,10 @@ public class TwentyMethods {
         }
     }
 
-    public static char[][] toCharArray(int[][] array) {
+    public static char[][] toChar(int[][] array) {
         char[][] result = new char[array.length][];
         for (int i = 0; i < array.length; i++) {
+            result[i] = new char[array[i].length];
             for (int j = 0; j < array[i].length; j++) {
                 result[i][j] = (char) array[i][j];
             }
@@ -121,6 +122,7 @@ public class TwentyMethods {
     }
 
     public static void print3(double d) {
+
         System.out.println(String.format("%.3f", d));
     }
 
@@ -172,4 +174,5 @@ public class TwentyMethods {
         }
         return false;
     }
+
 }
