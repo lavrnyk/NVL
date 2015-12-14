@@ -92,7 +92,7 @@ public class TwentyMethods {
     }
 
     public static boolean isLeapYear(int year) {
-        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0 ? true : false;
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
 
     public static String[] getIncluded(String[] array, String value) {
@@ -102,15 +102,23 @@ public class TwentyMethods {
             if (array[n].contains(value)) {
                 n++;
             } else {
-                for (int j = n; j < array.length - 1; j++) {
+                int j = n;
+                while (j < array.length - 1) {
                     array[j] = array[j + 1];
+                    j++;
                 }
             }
         }
-        String[] str = new String[n];
-        System.arraycopy(array, 0, str, 0, n);
-        array = str;
-        return str;
+        String[] arrayOfMatched = new String[n];
+
+        int i = 0;
+        while (i < arrayOfMatched.length) {
+            arrayOfMatched[i] = array[i];
+            i++;
+        }
+
+        array = arrayOfMatched;
+        return array;
     }
 
     public static void printMultiples(int[] array, int value) {
@@ -138,7 +146,6 @@ public class TwentyMethods {
                 }
             }
         }
-
     }
 
     public static void sortDescending(int[] array) {
@@ -174,5 +181,7 @@ public class TwentyMethods {
         }
         return false;
     }
+
+
 
 }
