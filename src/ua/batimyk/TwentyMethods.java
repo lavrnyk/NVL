@@ -170,7 +170,7 @@ public class TwentyMethods {
         }
     }
 
-    public static boolean isHasDupValue(byte[] ab) {
+    public static boolean hasDupValue(byte[] ab) {
         //one loop one array
         for (int i = 0; i < ab.length; i++) {
             for (int j = i + 1; j < ab.length; j++) {
