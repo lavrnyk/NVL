@@ -146,6 +146,7 @@ public class TwentyMethods {
                 }
             }
         }
+
     }
 
     public static void sortDescending(int[] array) {
@@ -181,7 +182,5 @@ public class TwentyMethods {
         }
         return false;
     }
-
-
 
 }

@@ -13,7 +13,10 @@ public class NumberConverterTest {
 
     @Test
     public void testToString() throws Exception {
-
+        assertEquals("234",NumberConverter.toString(234));
+        assertEquals("-234",NumberConverter.toString(-234));
+        assertEquals("0",NumberConverter.toString(0));
+        assertEquals("252266262",NumberConverter.toString(252266262));
     }
 
     @Test
