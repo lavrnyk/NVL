@@ -131,7 +131,7 @@ public class TwentyMethods {
 
     public static void print3(double d) {
 
-        System.out.println(String.format("%.3f", d));
+        System.out.printf("%.3f%n", d);
     }
 
     public static void sortAscending(int[] array) {
@@ -146,7 +146,6 @@ public class TwentyMethods {
                 }
             }
         }
-
     }
 
     public static void sortDescending(int[] array) {
@@ -172,7 +171,7 @@ public class TwentyMethods {
     }
 
     public static boolean isHasDupValue(byte[] ab) {
-        //two arrays
+        //one loop one array
         for (int i = 0; i < ab.length; i++) {
             for (int j = i + 1; j < ab.length; j++) {
                 if (ab[i] == ab[j]) {
@@ -183,4 +182,8 @@ public class TwentyMethods {
         return false;
     }
 
+    public static void main(String[] args) {
+        print3(5.6789);
+        print3(5.678);
+    }
 }
