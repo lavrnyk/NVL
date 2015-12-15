@@ -130,8 +130,10 @@ public class TwentyMethodsTest {
     public void testGetIncluded() throws Exception {
         String[] array = {"abcde", "dfgh", "frdsfs", "rty", "sdrdsf", "cvbnm", "addarf"};
         String[] arrayChecking = {"frdsfs", "sdrdsf"};
+        String[] emptyArray = {};
 
         assertArrayEquals(arrayChecking, TwentyMethods.getIncluded(array, "ds"));
+        assertArrayEquals(emptyArray, TwentyMethods.getIncluded(array, "ssssss"));
     }
 
     @Test
