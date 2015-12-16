@@ -19,6 +19,7 @@ public class NumberConverterTest {
         assertEquals("-234", NumberConverter.toString(-234));
         assertEquals("-34568", NumberConverter.toString(-34568));
         assertEquals("34568", NumberConverter.toString(34568));
+        assertEquals("10000", NumberConverter.toString(10000));
         assertEquals("0", NumberConverter.toString(0));
         assertEquals("252266267", NumberConverter.toString(252266267));
     }
@@ -26,6 +27,7 @@ public class NumberConverterTest {
     @Test
     public void testToInt() throws Exception {
         assertEquals(234, NumberConverter.toInt("234"));
+        assertEquals(100, NumberConverter.toInt("100"));
         assertEquals(-234, NumberConverter.toInt("-234"));
         assertEquals(34566, NumberConverter.toInt("34566"));
         assertEquals(-34566, NumberConverter.toInt("-34566"));
