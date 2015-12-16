@@ -7,10 +7,10 @@ import java.util.*;
 
 public class OpenFridge4x4 {
     /**************************************/
-    static int[] arrayFirst = {0, 1, 1, 1};
-    static int[] arraySecond = {0, 1, 1, 1};
-    static int[] arrayThird = {1, 1, 1, 1};
-    static int[] arrayForth = {0, 1, 1, 1};
+    static int[] arrayFirst  = {1, 1, 1, 1};
+    static int[] arraySecond = {1, 1, 1, 1};
+    static int[] arrayThird  = {0, 1, 1, 1};
+    static int[] arrayFourth  = {1, 0, 0, 0};
     /**************************************/
     static int[][] array = new int[4][4];
     static int stepsToUnLockR = 0;
@@ -32,7 +32,7 @@ public class OpenFridge4x4 {
             array[0][j] = arrayFirst[j];
             array[1][j] = arraySecond[j];
             array[2][j] = arrayThird[j];
-            array[3][j] = arrayForth[j];
+            array[3][j] = arrayFourth[j];
         }
     }
 

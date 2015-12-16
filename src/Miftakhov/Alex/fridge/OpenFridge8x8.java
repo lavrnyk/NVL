@@ -10,7 +10,7 @@ public class OpenFridge8x8 {
     private static int[] arrayFirst = {0, 0, 0, 0, 1, 0, 0, 0};
     private static int[] arraySecond = {0, 0, 0, 0, 1, 0, 0, 0};
     private static int[] arrayThird = {0, 0, 0, 0, 1, 0, 0, 0};
-    private static int[] arrayForth = {0, 0, 0, 0, 1, 0, 0, 0};
+    private static int[] arrayFourth = {0, 0, 0, 0, 1, 0, 0, 0};
     private static int[] arrayFifth = {0, 0, 0, 0, 1, 0, 0, 0};
     private static int[] arraySixth = {0, 0, 0, 0, 1, 0, 0, 0};
     private static int[] arraySeventh = {0, 0, 0, 0, 1, 0, 0, 0};
@@ -36,7 +36,7 @@ public class OpenFridge8x8 {
             array[0][j] = arrayFirst[j];
             array[1][j] = arraySecond[j];
             array[2][j] = arrayThird[j];
-            array[3][j] = arrayForth[j];
+            array[3][j] = arrayFourth[j];
             array[4][j] = arrayFifth[j];
             array[5][j] = arraySixth[j];
             array[6][j] = arraySeventh[j];
