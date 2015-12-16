@@ -38,14 +38,14 @@ public class NumberConverter {
             initPos = 1;
         }
 
-        int weight = (int)Math.pow(10, value.length() - initPos - 1);
+        int weight = (int) Math.pow(10, value.length() - initPos - 1);
 
         for (int i = initPos; i < value.length(); i++) {
             int digit = (value.charAt(i) - 48) * weight;
             ir += digit;
             weight /= 10;
         }
-        
+
         return sign * ir;
     }
 
@@ -65,31 +65,25 @@ public class NumberConverter {
         long weight = (long) Math.pow(10, n);
 
         for (int i = 0; i <= n; i++) {
-            int digit = (int)(value % (10 * weight) / weight);
+            int digit = (int) (value % (10 * weight) / weight);
             s.append(digit);
             weight /= 10;
         }
 
-        double fractionWeight = 10;
-        double fraction   = value % 1;
+        double remainder = (value % 1) ;
+        if (remainder == 0.0) s.append(".0");
+        else {
+            s.append(".");
 
-        s.append(".");
+            double fractionWeight = 1;
+            double precision = 10e-13;
+            while ((remainder % fractionWeight) > precision) {
+                int digit = (int) ((remainder % fractionWeight) / (fractionWeight / 10));
+                s.append(digit);
+                fractionWeight /= 10;
 
-        int i = 0;
-        double remainder = (fraction % 1) * 10;
-        long precision =  16 - n;
-
-        if (remainder == 0.0) s.append("0");
-
-        while(remainder > 1/Math.pow(10,n) && i <= precision  )
-        {
-            int digit = (int)(remainder % 10);
-            fractionWeight *= 10;
-            s.append(digit);
-            remainder = (fraction * fractionWeight) % 10;
-            i++;
+            }
         }
-
         return s.toString();
     }
 
@@ -107,13 +101,12 @@ public class NumberConverter {
             initPos = 1;
         }
 
-        long weight = (long)Math.pow(10, value.length() - initPos - 1);
+        long weight = (long) Math.pow(10, value.length() - initPos - 1);
 
         for (int i = initPos; i < value.length(); i++) {
-            if(value.charAt(i) == '.') {
-               dotPos = i;
-            }
-            else {
+            if (value.charAt(i) == '.') {
+                dotPos = i;
+            } else {
 
                 long digit = (value.charAt(i) - 48) * weight;
                 ir += digit;
@@ -121,31 +114,6 @@ public class NumberConverter {
             }
         }
 
-        return sign * ir / (long)Math.pow(10, value.length() - dotPos) ;
-    }
-
-    public static void main(String[] args) {
-        //System.out.println(245.7553633632647774754848448484);
-        //System.out.println(24.7553633632647774754848448484);
-        //System.out.println(2.7553633632647774754848448484);
-        //System.out.println(0.7553633632647774754848448484);
-        //System.out.println(1.7553633632647774754848448484);
-        //System.out.println(Math);
-
-       ///* System.out.println(2345.1d % 1);
-
-        System.out.println(2345d);
-        System.out.println(toString(2345.0));
-        System.out.println(2345.1234567890123456789);
-        System.out.println(toString(2345.1234567890123456789));
-        System.out.println(2345.678901);
-        System.out.println(toString(2345.678901));
-
-        System.out.println(1234.0001);
-        System.out.println(toString(1234.0001));
-        System.out.println(2345.123456789);
-        System.out.println(toString(2345.123456789));
-
-        System.out.println( 1110.001 % 1);
+        return sign * ir / (long) Math.pow(10, value.length() - dotPos);
     }
 }
