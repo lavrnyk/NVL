@@ -10,7 +10,7 @@ public class OpenFridge4x4 {
     static int[] arrayFirst  = {1, 1, 1, 1};
     static int[] arraySecond = {1, 1, 1, 1};
     static int[] arrayThird  = {0, 1, 1, 1};
-    static int[] arrayFourth  = {1, 0, 0, 0};
+    static int[] arrayFourth = {1, 0, 0, 0};
     /**************************************/
     static int[][] array = new int[4][4];
     static int stepsToUnLockR = 0;
