@@ -50,18 +50,21 @@ public class FridgeSolver {
         // fridge.setPositions(initPosForOneMove);
         //System.out.println(solveFridge.iterateFridge(0, 0, fridge));
 
-        while (!fridge.isOpen()) {
+
             for (int x = 0; x < fridge.getPositions().length; x++) {
                 for (int y = 0; y < fridge.getPositions()[x].length; y++) {
-                    fridge = solveFridge.iterateFridge(x, y, fridge);
-                    if (fridge.isOpen()) continue;
+                    while(!fridge.isOpen())
+                    {
+                        fridge.turnHandle(x,y);
+                        fridge = solveFridge.iterateFridge(x, y, fridge);
+                        System.out.println(fridge);
+                        continue;
+                    }
                 }
             }
-
 
             System.out.println(fridge);
 
         }
 
-    }
 }

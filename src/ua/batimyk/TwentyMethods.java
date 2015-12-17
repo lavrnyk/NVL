@@ -4,7 +4,7 @@ public class TwentyMethods {
 
     public static void print(char[] array) {
         for (char c : array) {
-            System.out.println(c);
+            System.out.print(c);
         }
     }
 
@@ -63,7 +63,9 @@ public class TwentyMethods {
                 i -= j;
                 j = -1;
             }
-            if (j == arrayToFind.length - 1) return true;
+            if (j == arrayToFind.length - 1) {
+                return true;
+            }
         }
         return false;
     }
@@ -78,9 +80,14 @@ public class TwentyMethods {
         return -1;
     }
 
-    public static int indexOfReversal(int[] array, int value) {
+    public static int lastIndexOf(int[] array, int value) {
 
-        return indexOf(array, value) == -1 ? -1 : array.length - indexOf(array, value) - 1;
+        for (int i = array.length - 1; i > 0; i--) {
+            if (array[i] == value) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public static int factorial(int value) {
@@ -117,8 +124,7 @@ public class TwentyMethods {
             i++;
         }
 
-        array = arrayOfMatched;
-        return array;
+        return arrayOfMatched;
     }
 
     public static void printMultiples(int[] array, int value) {
@@ -170,20 +176,18 @@ public class TwentyMethods {
         }
     }
 
-    public static boolean hasDupValue(byte[] ab) {
-        //one loop one array
-        for (int i = 0; i < ab.length; i++) {
-            for (int j = i + 1; j < ab.length; j++) {
-                if (ab[i] == ab[j]) {
-                    return true;
-                }
+
+    public static boolean hasDupValue(byte[] array) {
+
+        boolean[] checkingArray = new boolean[256];
+
+        for (byte b : array) {
+            if (checkingArray[b + 128]) {
+                return true;
+            } else {
+                checkingArray[b + 128] = true;
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        print3(5.6789);
-        print3(5.678);
     }
 }

@@ -29,7 +29,7 @@ public class NumberConverter {
 
     //2. String to Integer converter
     public static int toInt(String value) {
-        int ir = 0;
+        int result = 0;
         int sign = 1;
         int initPos = 0;
 
@@ -42,11 +42,11 @@ public class NumberConverter {
 
         for (int i = initPos; i < value.length(); i++) {
             int digit = (value.charAt(i) - 48) * weight;
-            ir += digit;
+            result += digit;
             weight /= 10;
         }
 
-        return sign * ir;
+        return sign * result;
     }
 
     //3. Double to String converter

@@ -19,8 +19,8 @@ public class Fridge {
         for (int[] yAxis : positions) {
             s.append('\n');
             for (int handlerState : yAxis) {
-                if(handlerState == 1) s.append("- ");
-                else if (handlerState == -1) s.append("| ");
+                if(handlerState == 1) s.append("1");
+                else if (handlerState == -1) s.append("0");
             }
         }
         return s.toString();

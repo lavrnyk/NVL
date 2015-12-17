@@ -2,12 +2,40 @@ package ua.batimyk;
 
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 /**
  * Created by N on 12/14/15.
  */
 public class TwentyMethodsTest {
+
+    @Test
+    public void testPrint() throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        char[] array = {'a','b','D','e','1', '@', '7'};
+        System.setOut(new PrintStream(out));
+        TwentyMethods.print(array);
+        assertEquals("abDe1@7", out.toString());
+
+    }
+
+    @Test
+    public void testPrint2dArray() throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String[][] array = {
+            {"aad[d","ttr],r","ryryrs"}
+           ,{"sfsfsa", "ffaffaf"}
+           ,{"abnghghg","3534dw3r","69^e43","4232ev"}
+        };
+        System.setOut(new PrintStream(out));
+        TwentyMethods.print(array);
+        assertEquals(String.format(Arrays.deepToString(array).replaceAll("]?, \\[?","%n").replaceAll("^\\[\\[|\\]\\]$","")+"%n"), out.toString());
+
+    }
 
     @Test
     public void testInvert() throws Exception {
@@ -97,16 +125,16 @@ public class TwentyMethodsTest {
 
     @Test
     public void testIndexOf() throws Exception {
-        int[] array = {10, 20, 30, 40};
+        int[] array = {10, 20, 30, 40, 10};
         assertEquals(0, TwentyMethods.indexOf(array, 10));
         assertEquals(3, TwentyMethods.indexOf(array, 40));
     }
 
     @Test
-    public void testIndexOfReversal() throws Exception {
-        int[] array = {10, 20, 30, 40};
-        assertEquals(0, TwentyMethods.indexOfReversal(array, 40));
-        assertEquals(3, TwentyMethods.indexOfReversal(array, 10));
+    public void testLastIndexOf() throws Exception {
+        int[] array = {10, 20, 30, 40, 10, 50};
+        assertEquals(3, TwentyMethods.lastIndexOf(array, 40));
+        assertEquals(4, TwentyMethods.lastIndexOf(array, 10));
     }
 
     @Test
@@ -172,7 +200,12 @@ public class TwentyMethodsTest {
     }
 
     @Test
-    public void testIsHasDupValue() throws Exception {
+    public void hasDupValue() throws Exception {
+        byte[] array = {2,4,6,7,8,9,11,3,7};
+        byte[] array2 = {11,22,34,53,21,1,2};
 
+        assertEquals(true,TwentyMethods.hasDupValue(array));
+        assertEquals(false,TwentyMethods.hasDupValue(array2));
     }
+
 }
