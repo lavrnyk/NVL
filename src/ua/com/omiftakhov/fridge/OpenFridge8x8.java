@@ -1,4 +1,4 @@
-package Miftakhov.Alex.fridge;
+package ua.com.omiftakhov.fridge;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package Miftakhov.Alex.fridge;
+package ua.com.omiftakhov.fridge;
 
 /**
  * Created by omiftakhov on 16.12.2015.

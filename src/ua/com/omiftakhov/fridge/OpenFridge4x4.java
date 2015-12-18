@@ -1,22 +1,20 @@
-package Miftakhov.Alex.fridge;
+package ua.com.omiftakhov.fridge;
+/**
+ * Created by omiftakhov on 14.12.2015.
+ */
 
 import java.util.*;
 
-/**
- * Created by omiftakhov on 16.12.2015.
- */
-public class OpenFridge6x6 {
+public class OpenFridge4x4 {
     /**************************************/
-    private static int[] arrayFirst = {0, 0, 0, 0, 1, 0};
-    private static int[] arraySecond = {0, 0, 0, 0, 1, 0};
-    private static int[] arrayThird = {0, 0, 0, 0, 1, 0};
-    private static int[] arrayFourth = {0, 0, 0, 0, 1, 0};
-    private static int[] arrayFifth = {0, 0, 0, 0, 1, 0};
-    private static int[] arraySixth = {0, 0, 0, 0, 1, 0};
+    static int[] arrayFirst  = {1, 1, 1, 1};
+    static int[] arraySecond = {1, 1, 1, 1};
+    static int[] arrayThird  = {0, 1, 1, 1};
+    static int[] arrayFourth = {1, 0, 0, 0};
     /**************************************/
-    private static int[][] array = new int[6][6];
-    private static int stepsToUnLockR = 0;
-    private static long date;
+    static int[][] array = new int[4][4];
+    static int stepsToUnLockR = 0;
+    static long date;
 
     public static void main(String[] args) {
         System.out.println("Start resolving using recurtion");
@@ -30,13 +28,11 @@ public class OpenFridge6x6 {
     }
 
     static void enrichArray() {
-        for (int j = 0; j < 6; j++) {
+        for (int j = 0; j < 4; j++) {
             array[0][j] = arrayFirst[j];
             array[1][j] = arraySecond[j];
             array[2][j] = arrayThird[j];
             array[3][j] = arrayFourth[j];
-            array[4][j] = arrayFifth[j];
-            array[5][j] = arraySixth[j];
         }
     }
 
@@ -53,5 +49,3 @@ public class OpenFridge6x6 {
         }
     }
 }
-
-
