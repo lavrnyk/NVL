@@ -71,12 +71,14 @@ public class NumberConverter {
         }
 
         double remainder = (value % 1) ;
+
+
         if (remainder == 0.0) s.append(".0");
         else {
             s.append(".");
 
             double fractionWeight = 1;
-            double precision = 10e-13;
+            double precision = (10e-16)*Math.pow(10,n) ;
             while ((remainder % fractionWeight) > precision) {
                 int digit = (int) ((remainder % fractionWeight) / (fractionWeight / 10));
                 s.append(digit);
