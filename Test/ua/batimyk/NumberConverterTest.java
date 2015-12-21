@@ -22,6 +22,7 @@ public class NumberConverterTest {
         assertEquals("252266267", NumberConverter.toString(252266267));
         assertEquals("9999", NumberConverter.toString(9999));
         assertEquals("-9999", NumberConverter.toString(-9999));
+        assertEquals("0", NumberConverter.toString(-0));
     }
 
     @Test
@@ -53,6 +54,8 @@ public class NumberConverterTest {
         assertEquals(837d, NumberConverter.toDouble("837"),0);
         assertEquals(-999.0, NumberConverter.toDouble("-999.0"),0);
         assertEquals(999.0, NumberConverter.toDouble("999.0"),0);
+        assertEquals(2554.12346d, NumberConverter.toDouble("2554.12346"),0);
+
     }
 
     @Test
@@ -68,6 +71,7 @@ public class NumberConverterTest {
         assertEquals("-1234.0025", NumberConverter.toString(-1234.0025));
         assertEquals("-9999.9999", NumberConverter.toString(-9999.9999));
         assertEquals("9999.9999", NumberConverter.toString(9999.9999));
+
 
     }
 }

@@ -31,17 +31,17 @@ public class FridgeSolver {
 
     public static void main(String[] args) {
         int[][] initPositions = {
-                {1, 1, -1, 1}
-                , {1, 1, -1, 1}
-                , {-1, -1, 1, -1}
-                , {1, 1, 1, -1}
+                  { 1,  1, -1,  1}
+                , { 1,  1, -1,  1}
+                , {-1, -1,  1, -1}
+                , { 1,  1,  1, -1}
         };
 
         int[][] initPosForOneMove = {
-                {1, 1, -1, 1}
-                , {1, 1, -1, 1}
+                  { 1,  1, -1,  1}
+                , { 1,  1, -1,  1}
                 , {-1, -1, -1, -1}
-                , {1, 1, -1, 1}
+                , { 1,  1, -1,  1}
         };
 
         Fridge fridge = new Fridge(initPositions);

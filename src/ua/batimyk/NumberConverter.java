@@ -1,6 +1,8 @@
 package ua.batimyk;
 
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 public class NumberConverter {
 
     //1. Integer to String converter
@@ -59,7 +61,8 @@ public class NumberConverter {
             s.append("-");
         }
 
-        if (value == 0.0) return "0.0";
+        if (value == 0.0) s.append("0");
+
 
         long n = (long) Math.log10(value);
         long weight = (long) Math.pow(10, n);
@@ -70,21 +73,22 @@ public class NumberConverter {
             weight /= 10;
         }
 
-        double remainder = (value % 1) ;
+        double remainder = (value % 1);
 
 
-        if (remainder == 0.0) s.append(".0");
-        else {
+        if (remainder != 0.0) {
             s.append(".");
 
+            double precision = (10e-16) * Math.pow(10, n);
             double fractionWeight = 1;
-            double precision = (10e-16)*Math.pow(10,n) ;
             while ((remainder % fractionWeight) > precision) {
-                int digit = (int) ((remainder % fractionWeight) / (fractionWeight / 10));
-                s.append(digit);
-                fractionWeight /= 10;
 
+            long digit = (long) ((remainder % fractionWeight) / (fractionWeight / 10));
+            fractionWeight /= 10;
+            s.append(digit);
             }
+        } else {
+            s.append(".0");
         }
         return s.toString();
     }

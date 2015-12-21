@@ -26,21 +26,22 @@ public class Fridge {
         return s.toString();
     }
 
+    public Fridge() {
+    }
+
     public Fridge(int[][] positions) {
         this.positions = positions;
     }
 
-    public Fridge() {
-    }
 
     public void turnHandle(int x, int y) {
         for (int i = 0; i < this.positions.length; i++) {
-            this.positions[y][i] *= -1;
+            this.positions[x][i] *= -1;
         }
         for (int i = 0; i < this.positions[x].length; i++) {
-            this.positions[i][x] *= -1;
+            this.positions[i][y] *= -1;
         }
-        this.positions[y][x] *= -1;
+        this.positions[x][y] *= -1;
     }
 
     public void setPositions(int[][] positions) {
