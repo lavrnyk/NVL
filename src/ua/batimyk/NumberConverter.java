@@ -79,13 +79,19 @@ public class NumberConverter {
         if (remainder != 0.0) {
             s.append(".");
 
-            double precision = (10e-16) * Math.pow(10, n);
-            double fractionWeight = 1;
-            while ((remainder % fractionWeight) > precision) {
+            double precision = (10e-13) * Math.pow(10, n);
+            double fractionWeight = 10;
 
-            long digit = (long) ((remainder % fractionWeight) / (fractionWeight / 10));
-            fractionWeight /= 10;
-            s.append(digit);
+            while(remainder > 0.01 && remainder > precision )
+            {
+
+                remainder *= 10 + precision;
+                int digit = (int) (remainder);
+
+                remainder -= digit ;
+
+                s.append(digit);
+
             }
         } else {
             s.append(".0");
@@ -121,5 +127,12 @@ public class NumberConverter {
         }
 
         return sign * ir / (long) Math.pow(10, value.length() - dotPos);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(toString(1.123456087));
+        System.out.println(toString(123.00001));
+        System.out.println(toString(2554.12346));
+
     }
 }

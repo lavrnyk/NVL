@@ -102,7 +102,7 @@ public class TwentyMethodsTest {
     }
 
     @Test
-    public void testInclude() throws Exception {
+    public void testContains() throws Exception {
         char[][] array = {
                 {'a', 'b', 'c', 'd', 'e', 'e', 'f'}
                 , {'a', 'a', 'b', 'b', 'c'}
@@ -114,13 +114,13 @@ public class TwentyMethodsTest {
                 , {'a', 'b'}
         };
 
-        assertEquals(true, TwentyMethods.include(array[0], arrayToFind[0]));
-        assertEquals(true, TwentyMethods.include(array[0], array[0]));
-        assertEquals(true, TwentyMethods.include(array[1], array[1]));
-        assertEquals(true, TwentyMethods.include(array[1], arrayToFind[2]));
-        assertEquals(true, TwentyMethods.include(array[0], arrayToFind[3]));
-        assertEquals(false, TwentyMethods.include(array[0], arrayToFind[1]));
-        assertEquals(false, TwentyMethods.include(array[1], arrayToFind[1]));
+        assertEquals(true, TwentyMethods.contains(array[0], arrayToFind[0]));
+        assertEquals(true, TwentyMethods.contains(array[0], array[0]));
+        assertEquals(true, TwentyMethods.contains(array[1], array[1]));
+        assertEquals(true, TwentyMethods.contains(array[1], arrayToFind[2]));
+        assertEquals(true, TwentyMethods.contains(array[0], arrayToFind[3]));
+        assertEquals(false, TwentyMethods.contains(array[0], arrayToFind[1]));
+        assertEquals(false, TwentyMethods.contains(array[1], arrayToFind[1]));
     }
 
     @Test

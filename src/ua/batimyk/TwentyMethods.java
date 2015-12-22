@@ -55,7 +55,7 @@ public class TwentyMethods {
         return s;
     }
 
-    public static boolean include(char[] array, char[] arrayToFind) {
+    public static boolean contains(char[] array, char[] arrayToFind) {
 
         for (int i = 0, j = 0; i < array.length; i++, j++) {
 
@@ -104,19 +104,19 @@ public class TwentyMethods {
 
     public static String[] getIncluded(String[] array, String value) {
 
-        int n = 0;
+        int matchCount = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[n].contains(value)) {
-                n++;
+            if (array[matchCount].contains(value)) {
+                matchCount++;
             } else {
-                int j = n;
+                int j = matchCount;
                 while (j < array.length - 1) {
                     array[j] = array[j + 1];
                     j++;
                 }
             }
         }
-        String[] arrayOfMatched = new String[n];
+        String[] arrayOfMatched = new String[matchCount];
 
         int i = 0;
         while (i < arrayOfMatched.length) {
