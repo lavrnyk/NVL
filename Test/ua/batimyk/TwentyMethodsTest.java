@@ -104,17 +104,25 @@ public class TwentyMethodsTest {
     @Test
     public void testContains() throws Exception {
         char[][] array = {
-                {'a', 'b', 'c', 'd', 'e', 'e', 'f'}
+                  {'a', 'b', 'c', 'd', 'e', 'e', 'f'}
                 , {'a', 'a', 'b', 'b', 'c'}
         };
         char[][] arrayToFind = {
-                {'e', 'e', 'f'}
+                  {'e', 'e', 'f'}
                 , {'a', 'c'}
                 , {'b', 'b'}
                 , {'a', 'b'}
+                , {}
+                , {'b', 'b', 'b'}
         };
 
+        char[] charArrayT = {'a','z','e','a','b'};
+        char[] charArrayTz = {'z','e','b'};
+
+        assertEquals(false, TwentyMethods.contains(charArrayT,charArrayTz));
+        assertEquals(false, TwentyMethods.contains(array[0],arrayToFind[4]));
         assertEquals(true, TwentyMethods.contains(array[0], arrayToFind[0]));
+        assertEquals(false, TwentyMethods.contains(array[1], arrayToFind[5]));
         assertEquals(true, TwentyMethods.contains(array[0], array[0]));
         assertEquals(true, TwentyMethods.contains(array[1], array[1]));
         assertEquals(true, TwentyMethods.contains(array[1], arrayToFind[2]));
@@ -208,4 +216,33 @@ public class TwentyMethodsTest {
         assertEquals(false,TwentyMethods.hasDupValue(array2));
     }
 
+   /* @Test
+    public void testIsEquals() throws Exception {
+        char[][] array = {
+                {'a', 'b', 'c', 'd', 'e', 'e', 'f'}
+                , {'a', 'a', 'b', 'b', 'c'}
+        };
+        char[][] arrayToFind = {
+                {'e', 'e', 'f'}
+                , {'a', 'c'}
+                , {'b', 'b'}
+                , {'a', 'b'}
+                , {}
+                , {'b', 'b', 'b'}
+        };
+
+        char[] charArrayT = {'a','z','e','a','b'};
+        char[] charArrayTz = {'z','e','b'};
+
+        assertEquals(false, TwentyMethods.isEqual(charArrayT,charArrayTz));
+        assertEquals(false, TwentyMethods.isEqual(array[0],arrayToFind[4]));
+        assertEquals(true, TwentyMethods.isEqual(array[0], arrayToFind[0]));
+        assertEquals(false, TwentyMethods.isEqual(array[1], arrayToFind[5]));
+        assertEquals(true, TwentyMethods.isEqual(array[0], array[0]));
+        assertEquals(true, TwentyMethods.isEqual(array[1], array[1]));
+        assertEquals(true, TwentyMethods.isEqual(array[1], arrayToFind[2]));
+        assertEquals(true, TwentyMethods.isEqual(array[0], arrayToFind[3]));
+        assertEquals(false, TwentyMethods.isEqual(array[0], arrayToFind[1]));
+        assertEquals(false, TwentyMethods.isEqual(array[1], arrayToFind[1]));
+    }*/
 }

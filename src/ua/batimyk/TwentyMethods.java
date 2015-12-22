@@ -57,7 +57,7 @@ public class TwentyMethods {
 
     public static boolean contains(char[] array, char[] arrayToFind) {
 
-        for (int i = 0, j = 0; i < array.length; i++, j++) {
+        for (int i = 0, j = 0; i < array.length && j < arrayToFind.length; i++, j++) {
 
             if (array[i] != arrayToFind[j]) {
                 i -= j;
@@ -190,4 +190,35 @@ public class TwentyMethods {
         }
         return false;
     }
+
+  /* static boolean isEqual(char[] array, char[] subArray)
+    {
+        int subArrayLength = subArray.length;     // using couple of times - easier to calc it
+        boolean isEqual = true;
+
+        if (subArray.length == 0) {
+            isEqual = false;
+            return isEqual;
+        }
+
+        int limit = array.length - subArrayLength;
+
+        for (int i = 0; i <= limit; i++) {
+            if (subArray[0] == array[i])
+            {
+                for (int j = 1; j < subArrayLength; j++) {
+                    if (subArray[j] != array[i+j])
+                    {
+                        isEqual = false;
+                    } else
+                    {
+                        isEqual = true;
+                    }
+                }
+            }
+        }
+        return isEqual;
+    }*/
+
+
 }
