@@ -37,7 +37,7 @@ public class Fridge {
     }
 
 
-    public void turnHandle(int x, int y) {
+    public Fridge turnHandle(int x, int y) {
         for (int i = 0; i < this.positions.length; i++) {
             this.positions[x][i] *= -1;
         }
@@ -45,6 +45,8 @@ public class Fridge {
             this.positions[i][y] *= -1;
         }
         this.positions[x][y] *= -1;
+
+        return Fridge.this;
     }
 
     public void setPositions(int[][] positions) {

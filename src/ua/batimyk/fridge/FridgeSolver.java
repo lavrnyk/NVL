@@ -1,70 +1,67 @@
 package ua.batimyk.fridge;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by N on 12/16/15.
  */
 public class FridgeSolver {
 
-    public Fridge iterateFridge(int startX, int startY, Fridge fridge) {
-        int count = 0;
-        for (int x = 0; x < fridge.getPositions().length; x++) {
+    private int curStateNumber;
 
-            for (int y = 0; y < fridge.getPositions()[x].length; y++) {
-                if (x == startX && y == startY) {
-                    continue;
-                }
-                fridge.turnHandle(x, y);
-                if (fridge.isOpen()) {
-                    System.out.println("Solved!");
-                    //System.out.println("[" + x + "," + y +"]");
-                    return fridge;
-                } else {
-                    fridge.turnHandle(x, y);
+    // keeps track of all seen states to prevent double seeing them again
+    // possible optimisation - store some hash value as Arrays.deepHash()
+    private Set<String> statesSeen = new HashSet<>();
+
+    // keeps track of possibly eligible states
+    private Queue<Fridge> states = new LinkedList<>();
+
+    public Fridge findFirstSolution(Fridge state) {
+        statesSeen.add(state.toString());
+        states.add(state);
+        while (!states.isEmpty()) {
+            Fridge curState = states.poll();
+            if (curStateNumber % 10000 == 0) {
+                System.out.println("Looking at " + curStateNumber + "th state");
+            }
+            curStateNumber++;
+            for (int x = 0; x < curState.getPositions().length; x++) {
+                for (int y = 0; y < curState.getPositions()[0].length; y++) {
+                    Fridge newState = curState.turnHandle(x, y);
+                    if (statesSeen.contains(newState.toString())) { // newState has already been seen, skipping
+                        continue;
+                    }
+                    if (newState.isOpen()) {
+                        System.out.println("Looked at " + curStateNumber + " states.");
+                        return newState;
+                    } else {
+                        states.add(newState);
+                    }
                 }
             }
         }
-
-        return fridge;
+        System.out.println("Looked at " + curStateNumber + " states.");
+        return null;
     }
 
     public static void main(String[] args) {
         int[][] initPositions = {
-                  { 1,  1, -1,  1}
-                , { 1,  1, -1,  1}
-                , {-1, -1,  1, -1}
-                , { 1,  1,  1, -1}
+                {1, 1, -1, 1}
+                , {1, 1, -1, 1}
+                , {-1, -1, 1, -1}
+                , {1, 1, 1, -1}
         };
 
         int[][] initPosForOneMove = {
-                  { 1,  1, -1,  1}
-                , { 1,  1, -1,  1}
+                {1, 1, -1, 1}
+                , {1, 1, -1, 1}
                 , {-1, -1, -1, -1}
-                , { 1,  1, -1,  1}
+                , {1, 1, -1, 1}
         };
 
-        Fridge fridge = new Fridge(initPositions);
+        Fridge fridge = new Fridge(initPosForOneMove);
         FridgeSolver solveFridge = new FridgeSolver();
-        // System.out.println(solveFridge.iterateFridge(0, 0, fridge));
-        // fridge.setPositions(initPosForOneMove);
-        //System.out.println(solveFridge.iterateFridge(0, 0, fridge));
+        solveFridge.findFirstSolution(fridge);
 
-
-            for (int x = 0; x < fridge.getPositions().length; x++) {
-                for (int y = 0; y < fridge.getPositions()[x].length; y++) {
-                    while(!fridge.isOpen())
-                    {
-                        fridge.turnHandle(x,y);
-                        fridge = solveFridge.iterateFridge(x, y, fridge);
-                        System.out.println(fridge);
-                        continue;
-                    }
-                }
-            }
-
-            System.out.println(fridge);
-
-        }
-
+    }
 }
