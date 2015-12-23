@@ -1,4 +1,4 @@
-package Miftakhov.Alex.arraysManipulationAndCo;
+package ua.com.omiftakhov.arraysManipulationAndCo;
 
 import java.util.*;
 
@@ -11,21 +11,21 @@ public class ArraysManipulation {
         int[] intArraySecond = {61, 65, 74};
         int[] resultArrey;
         int[][] intArrays = {intArrayFirst, intArraySecond};
-        byte[] byteArrayNegative = {-15,0,5,8,15,3};
-        byte[] byteArrayPositive = {-15,0,5,8,-15,8};
+        byte[] byteArrayNegative = {-15, 0, 5, 8, 15, 3};
+        byte[] byteArrayPositive = {-15, 0, 5, 8, -15, 8};
 
         String[] stringArray = {"sdf", "sdvzd", "htyj", "rtjr", "rtj", "ryuu"};
         String[] stringArry = {"ads", "sf", "dsfs", "sdf", "sdfsd", "sdf"};
         String[][] stringArrays = {stringArray, stringArry};
 
         char[] charArray = {'Z', 'x', 'Y', 'A', 'b'};
-        char[] charArry = {'A', 'r', 'B', 'd', '+'};
-        char[] comparedCharArray = {'x', 'Y', 'A'};
+        char[] charArry = {'A', 'r', 'B', 'd', 'b'};
+        char[] comparedCharArray = {'b'};//{'x', 'Y', 'A'};
         char[][] charArrays = new char[2][];
         charArrays[0] = charArray;
         charArrays[1] = charArry;
 
-        System.out.println("#1 Begin");
+       /* System.out.println("#1 Begin");
         printArray(charArray);
 
         System.out.println("#2 Begin");
@@ -53,7 +53,9 @@ public class ArraysManipulation {
         System.out.println("#9 Begin!");
         System.out.println("Must be TRUE: " + isCharArrayPartOfCharArray(charArray, comparedCharArray));
         System.out.println("Must be FALSE: " + isCharArrayPartOfCharArray(charArray, charArry));
-
+        char[] charArrayT1 = {'a', 'b', 'c', 'e', 'a', 'a'};
+        char[] charArrayT2 = {'a', 'a'};
+        System.out.println("DS _ " + isCharArrayPartOfCharArray(charArrayT1, charArrayT2));
 
         System.out.println("#10 Begin");
         System.out.println(indexOfArrayFromBegin(intArrayFirst, 65));
@@ -97,8 +99,29 @@ public class ArraysManipulation {
         printArray(intArraySortUniversal(intArrayFirst, true));
 
         System.out.println("#20 Begin");
-        System.out.println("Expected - FALSE: "+isIncludeDupicates(byteArrayNegative));
-        System.out.println("Expected - TRUE: "+isIncludeDupicates(byteArrayPositive));
+        System.out.println("Expected - FALSE: " + isIncludeDupicates(byteArrayNegative));
+        System.out.println("Expected - TRUE: " + isIncludeDupicates(byteArrayPositive));
+
+
+        System.out.println("#20-1 Begin");
+        System.out.println("Expected - FALSE: " + isIncludeDupicate(byteArrayNegative));
+        System.out.println("Expected - TRUE: " + isIncludeDupicate(byteArrayPositive));
+
+        System.out.println("#20-2 Begin");
+        System.out.println("Expected - FALSE: " + isIncludeDupicatee(byteArrayNegative));
+        System.out.println("Expected - TRUE: " + isIncludeDupicatee(byteArrayPositive));
+
+        System.out.println("#20-3 Begin");
+        System.out.println("Expected - FALSE: " + isIncludeDuplicate(byteArrayNegative));
+        System.out.println("Expected - TRUE: " + isIncludeDuplicate(byteArrayPositive));
+
+        System.out.println(isContainsSecond(charArray, comparedCharArray));
+        System.out.println(isContainsSecond(charArray, charArry));*/
+        char[] charArrayT = {'a','z','e','e','b'};
+        char[] charArrayTz = {'e','e'};
+        System.out.println(isContainsSecond(charArrayT, charArrayTz)+" NL");
+        System.out.println(isCharArrayPartOfCharArray(charArrayT, charArrayTz));
+        System.out.println(isEqual(charArrayT, charArrayTz)+"  DS");
 
     }
 
@@ -163,7 +186,6 @@ public class ArraysManipulation {
     }
 
 
-
     //3
     static char[][] intArrayToCharArray(int[][] array) {
         char[][] result = new char[array.length][];
@@ -218,12 +240,13 @@ public class ArraysManipulation {
     static boolean isCharArrayPartOfCharArray(char[] arrayParent, char[] arrayPaired) {
         boolean result = false;
         int j = 0;
-        for (int i = 0; i < arrayParent.length && j < arrayPaired.length; i++) {
+        for (int i = 0; i < arrayParent.length && j < arrayPaired.length; i= i+2) {
             if (arrayPaired[j] == arrayParent[i]) {
                 j++;
+                i = i-1;
             }
         }
-        if (j == arrayPaired.length) {
+        if (j == arrayPaired.length && j != 0) {
             result = true;
         }
         return result;
@@ -344,7 +367,7 @@ public class ArraysManipulation {
         for (int i = 0; i < input.length; i++) {
             for (int j = i; j < input.length; j++) {
                 if (input[i] != isBigger(input[j], input[i])) {
-                   int tempint = input[i];
+                    int tempint = input[i];
                     input[i] = input[j];
                     input[j] = tempint;
                 }
@@ -352,11 +375,12 @@ public class ArraysManipulation {
         }
         return input;
     }
+
     static byte[] intArrayReverseSort(byte[] input) {
         for (int i = 0; i < input.length; i++) {
             for (int j = i; j < input.length; j++) {
                 if (input[i] != isBigger(input[j], input[i])) {
-                   byte tempint = input[i];
+                    byte tempint = input[i];
                     input[i] = input[j];
                     input[j] = tempint;
                 }
@@ -380,15 +404,66 @@ public class ArraysManipulation {
     static boolean isIncludeDupicates(byte[] input) {
         boolean result = false;
         byte[] resultArray = intArrayReverseSort(input);
-        for (int i = 0; i < resultArray.length-1; i++) {
-             if (input[i] == input[i+1]) {
-                 result = true;
-                }
+        for (int i = 0; i < resultArray.length - 1; i++) {
+            if (input[i] == input[i + 1]) {
+                result = true;
             }
+        }
         return result;
     }
 
+    //20 alternative
+    static boolean isIncludeDupicate(byte[] input) {
+        boolean result = false;
+        //  byte[] resultArray = new byte[input.length];
+        String test = new String(input);
+        for (int i = 0; i < input.length - 1; i++) {
+            if (test.indexOf(input[i]) != test.lastIndexOf(input[i])) {
+                return result = true;
+            }
+        }
+        return result;
+    }
 
+    //20 alternative2
+    static boolean isIncludeDupicatee(byte[] input) {
+        boolean result = false;
+        byte[] resultArray = new byte[input.length];
+        for (int i = 0, j = 0; i < input.length - 1; i++) {
+            resultArray[j] = input[i];
+        }
+        return result;
+    }
+
+    //20  trhird
+    static boolean isIncludeDuplicate(byte[] input) {
+        boolean[] isNew = new boolean[256];
+        for (byte i : input)
+            if (isNew[i + 128]) {
+                return true;
+            } else {
+                isNew[i + 128] = true;
+            }
+
+        return false;
+    }
+
+    public static boolean isContainsSecond(char[] first, char[] second) {
+        boolean result = false;
+        for (int i = 0, j = 0; i < first.length && j < second.length; i++) {
+            if (first.length - i < second.length - j) {
+                return result;
+            }
+            if (first[i] == second[j]) {
+                result = true;
+                j++;
+            } else {
+                j = 0;
+                result = false;
+            }
+        }
+        return result;
+    }
 
     /*static int[] intersec(int[] firstArray, int[] secondArray) {
         int[] result = new int[firstArray.length + secondArray.length];
@@ -417,6 +492,36 @@ public class ArraysManipulation {
         }
         return result;
     }*/
+    static boolean isEqual(char[] array, char[] subArray)
+    {
+        int subArrayLength = subArray.length;     // using couple of times - easier to calc it
+        boolean isEqual = true;
+
+        if (subArray.length == 0) {
+            isEqual = false;
+            return isEqual;
+        }
+
+        int limit = array.length - subArrayLength;
+
+        for (int i = 0; i <= limit; i++) {
+            if (subArray[0] == array[i])
+            {
+                for (int j = 1; j < subArrayLength; j++) {
+                    if (subArray[j] != array[i+j])
+                    {
+                        isEqual = false;
+                    } else
+                    {
+                        isEqual = true;
+                    }
+                }
+            }
+        }
+        return isEqual;
+
+    }
+
 
     static int[] generateIntArray(int x, int lower, int higher) {
         int[] resultArray = new int[x];
