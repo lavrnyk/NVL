@@ -44,6 +44,7 @@ public class FridgeSolver {
                 , { 1,  1, -1,  1}
         };
 
+
         Fridge fridge = new Fridge(initPositions);
         FridgeSolver solveFridge = new FridgeSolver();
         // System.out.println(solveFridge.iterateFridge(0, 0, fridge));
