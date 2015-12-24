@@ -1,6 +1,7 @@
 package ua.batimyk;
 
 import org.junit.Test;
+import ua.batimyk.list.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -71,7 +72,6 @@ public class NumberConverterTest {
         assertEquals("-1234.0025", NumberConverter.toString(-1234.0025));
         assertEquals("-9999.9999", NumberConverter.toString(-9999.9999));
         assertEquals("9999.9999", NumberConverter.toString(9999.9999));
-
 
     }
 }
