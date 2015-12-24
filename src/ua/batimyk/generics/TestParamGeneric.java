@@ -15,7 +15,7 @@ public class Test {
         List<String> list = new ArrayList<>();
         list.add("Hello");
         list.add("world");
-        list.get
+
 
         for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
             Object next = iterator.next();
