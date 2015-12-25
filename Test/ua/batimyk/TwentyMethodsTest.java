@@ -16,7 +16,7 @@ public class TwentyMethodsTest {
     @Test
     public void testPrint() throws Exception {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        char[] array = {'a','b','D','e','1', '@', '7'};
+        char[] array = {'a', 'b', 'D', 'e', '1', '@', '7'};
         System.setOut(new PrintStream(out));
         TwentyMethods.print(array);
         assertEquals("abDe1@7", out.toString());
@@ -27,13 +27,13 @@ public class TwentyMethodsTest {
     public void testPrint2dArray() throws Exception {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         String[][] array = {
-            {"aad[d","ttr],r","ryryrs"}
-           ,{"sfsfsa", "ffaffaf"}
-           ,{"abnghghg","3534dw3r","69^e43","4232ev"}
+                {"aad[d", "ttr],r", "ryryrs"}
+                , {"sfsfsa", "ffaffaf"}
+                , {"abnghghg", "3534dw3r", "69^e43", "4232ev"}
         };
         System.setOut(new PrintStream(out));
         TwentyMethods.print(array);
-        assertEquals(String.format(Arrays.deepToString(array).replaceAll("]?, \\[?","%n").replaceAll("^\\[\\[|\\]\\]$","")+"%n"), out.toString());
+        assertEquals(String.format(Arrays.deepToString(array).replaceAll("]?, \\[?", "%n").replaceAll("^\\[\\[|\\]\\]$", "") + "%n"), out.toString());
 
     }
 
@@ -104,27 +104,27 @@ public class TwentyMethodsTest {
     @Test
     public void testContains() throws Exception {
         char[][] array = {
-                  {'a', 'b', 'c', 'd', 'e', 'e', 'f'}
-                , {'a', 'a', 'b', 'b', 'c'}
+                {'a', 'b', 'c', 'd', 'e', 'e', 'f'} //0
+                , {'a', 'a', 'b', 'b', 'c'}           //1
         };
         char[][] arrayToFind = {
-                  {'e', 'e', 'f'}
-                , {'a', 'c'}
-                , {'b', 'b'}
-                , {'a', 'b'}
-                , {}
-                , {'b', 'b', 'b'}
+                {'e', 'e', 'f'} //0
+                , {'a', 'c'}      //1
+                , {'b', 'b'}      //2
+                , {'a', 'b'}      //3
+                , {}              //4
+                , {'b', 'b', 'b'} //5
         };
 
-        char[] charArrayT = {'a','z','e','a','b'};
-        char[] charArrayTz = {'z','e','b'};
+        char[] charArrayT = {'a', 'z', 'e', 'a', 'b'};
+        char[] charArrayTz = {'z', 'e', 'b'};
 
         char[] array1 = {'a', 'z', 'e', 'e', 'a', 'a'};
         char[] array2 = {'a', 'z', 'e', 'e', 'a'};
 
         assertEquals(true, TwentyMethods.contains(array1, array2));
-        assertEquals(false, TwentyMethods.contains(charArrayT,charArrayTz));
-        assertEquals(false, TwentyMethods.contains(array[0],arrayToFind[4]));
+        assertEquals(false, TwentyMethods.contains(charArrayT, charArrayTz));
+        assertEquals(false, TwentyMethods.contains(array[0], arrayToFind[4]));
         assertEquals(true, TwentyMethods.contains(array[0], arrayToFind[0]));
         assertEquals(false, TwentyMethods.contains(array[1], arrayToFind[5]));
         assertEquals(true, TwentyMethods.contains(array[0], array[0]));
@@ -133,6 +133,15 @@ public class TwentyMethodsTest {
         assertEquals(true, TwentyMethods.contains(array[0], arrayToFind[3]));
         assertEquals(false, TwentyMethods.contains(array[0], arrayToFind[1]));
         assertEquals(false, TwentyMethods.contains(array[1], arrayToFind[1]));
+
+        assertEquals(true, TwentyMethods.contains(new char[]{'a', 'z', 'e', 'e', 'a'}, new char[]{'a', 'z', 'e'}));
+        assertEquals(true, TwentyMethods.contains(new char[]{'a', 'a', 'e', 'a', 'a', 'a'}, new char[]{'a', 'e', 'a'}));
+        assertEquals(false, TwentyMethods.contains(new char[]{'a', 'a', 'e', 'a', 'a', 'a'}, new char[]{}));
+        assertEquals(false, TwentyMethods.contains(new char[]{'a', 'a', 'e', 'a', 'a', 'a'}, new char[]{'a', 'e', 'a', 'd'}));
+        assertEquals(false, TwentyMethods.contains(new char[]{}, new char[]{'a', 'e', 'a'}));
+        assertEquals(true, TwentyMethods.contains(new char[]{'a', 'f', 'e', 'a', 'a', 'e'}, new char[]{'a', 'e'}));
+        assertEquals(true, TwentyMethods.contains(new char[]{'a', 'z', 'e', 'e', 'a', 'a', 'x'}, new char[]{'e', 'a', 'a', 'x'}));
+
     }
 
     @Test
@@ -213,11 +222,11 @@ public class TwentyMethodsTest {
 
     @Test
     public void hasDupValue() throws Exception {
-        byte[] array = {2,4,6,7,8,9,11,3,7};
-        byte[] array2 = {11,22,34,53,21,1,2};
+        byte[] array = {2, 4, 6, 7, 8, 9, 11, 3, 7};
+        byte[] array2 = {11, 22, 34, 53, 21, 1, 2};
 
-        assertEquals(true,TwentyMethods.hasDupValue(array));
-        assertEquals(false,TwentyMethods.hasDupValue(array2));
+        assertEquals(true, TwentyMethods.hasDupValue(array));
+        assertEquals(false, TwentyMethods.hasDupValue(array2));
     }
 
     @Test
@@ -235,12 +244,12 @@ public class TwentyMethodsTest {
                 , {'b', 'b', 'b'}
         };
 
-        char[] charArrayT = {'a','z','e','a','b'};
-        char[] charArrayTz = {'z','e','b'};
+        char[] charArrayT = {'a', 'z', 'e', 'a', 'b'};
+        char[] charArrayTz = {'z', 'e', 'b'};
 
-       // assertEquals(true, TwentyMethods.isEqual(array[0], arrayToFind[3]));
-        assertEquals(false, TwentyMethods.isEqual(charArrayT,charArrayTz));
-        assertEquals(false, TwentyMethods.isEqual(array[0],arrayToFind[4]));
+        // assertEquals(true, TwentyMethods.isEqual(array[0], arrayToFind[3]));
+        assertEquals(false, TwentyMethods.isEqual(charArrayT, charArrayTz));
+        assertEquals(false, TwentyMethods.isEqual(array[0], arrayToFind[4]));
         assertEquals(true, TwentyMethods.isEqual(array[0], arrayToFind[0]));
         assertEquals(false, TwentyMethods.isEqual(array[1], arrayToFind[5]));
         assertEquals(true, TwentyMethods.isEqual(array[0], array[0]));

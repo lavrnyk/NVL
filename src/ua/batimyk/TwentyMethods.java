@@ -222,5 +222,11 @@ public class TwentyMethods {
 
     }
 
+    public static void main(String[] args) {
+        System.out.println(contains(new char[]{'a', 'a', 'a', 'a', 'b', 'c'},
+                new char[]{'a', 'a', 'b', 'c'}
+
+        ));
+    }
 
 }
