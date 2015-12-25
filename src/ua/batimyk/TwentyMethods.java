@@ -55,10 +55,8 @@ public class TwentyMethods {
         return s;
     }
 
-    public static boolean include(char[] array, char[] arrayToFind) {
-
-        for (int i = 0, j = 0; i < array.length; i++, j++) {
-
+    public static boolean contains(char[] array, char[] arrayToFind) {
+        for (int i = 0, j = 0; i < array.length && j < arrayToFind.length; i++, j++) {
             if (array[i] != arrayToFind[j]) {
                 i -= j;
                 j = -1;
@@ -71,7 +69,6 @@ public class TwentyMethods {
     }
 
     public static int indexOf(int[] array, int value) {
-
         for (int i = 0; i < array.length; i++) {
             if (array[i] == value) {
                 return i;
@@ -91,7 +88,6 @@ public class TwentyMethods {
     }
 
     public static int factorial(int value) {
-
         if (value == 0) {
             return 1;
         }
@@ -104,19 +100,19 @@ public class TwentyMethods {
 
     public static String[] getIncluded(String[] array, String value) {
 
-        int n = 0;
+        int matchCount = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[n].contains(value)) {
-                n++;
+            if (array[matchCount].contains(value)) {
+                matchCount++;
             } else {
-                int j = n;
+                int j = matchCount;
                 while (j < array.length - 1) {
                     array[j] = array[j + 1];
                     j++;
                 }
             }
         }
-        String[] arrayOfMatched = new String[n];
+        String[] arrayOfMatched = new String[matchCount];
 
         int i = 0;
         while (i < arrayOfMatched.length) {
@@ -190,4 +186,41 @@ public class TwentyMethods {
         }
         return false;
     }
+
+    static boolean isEqual(char[] array, char[] subArray) {
+        int subArrayLength = subArray.length;     // using couple of times - easier to calc it
+        boolean isEqual = false;
+
+        if (subArrayLength == 0 || subArrayLength > array.length) {
+            isEqual = false;
+            return isEqual;
+        }
+//            System.out.println(array);
+//            System.out.println(subArray);
+        int limit = array.length - subArrayLength;
+
+        for (int i = 0; i <= limit; i++) {
+            if (subArray[0] == array[i])
+                isEqual = true;
+
+            {
+                for (int j = 1; j < subArrayLength && i < subArrayLength; j++) {
+
+//                        System.out.println(i+1 + "    " + j);
+//                        System.out.println(subArray[j] + "   " + array[i+1]);
+                    if (subArray[j] != array[i + j]) {
+                        isEqual = false;
+                        break;
+                    } else {
+                        isEqual = true;
+                    }
+
+                }
+            }
+        }
+        return isEqual;
+
+    }
+
+
 }
