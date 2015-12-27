@@ -6,84 +6,121 @@ package ua.batimyk.list;
 public class ArrayList implements List {
 
     private int size = 0;
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int INITIAL_CAPACITY = 10;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
-    private static final float INCRFEASING_COEFFICIENT = 1.5f;
+    private static final float INCREASING_COEFFICIENT = 1.5f;
 
-    protected int capacity = 0;
+    protected int capacity = INITIAL_CAPACITY;
 
-    Object[] elements;
+    Object[] elements = new Object[capacity];
 
     public void add(Object value) {
-        elements[size++] = value;
+        rangeCheck(size);
+        checkCapacity(size);
+        elements[size] = value;
+        size++;
     }
 
-    public void add(int index, Object value){
-        rangeCheckAdd(index);
+    public void add(int index, Object value) {
+        rangeCheck(size);
+        checkCapacity(size);
+        size++;
+
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
+        }
+        elements[index] = value;
     }
 
-    public Object set(int index, Object value){
+    public Object set(int index, Object value) {
         rangeCheck(index);
         Object elementOld = elements[index];
         elements[index] = value;
         return elementOld;
     }
 
-    public Object remove(int index){
-        rangeCheck(index);
-        Object elementOld = elements[index];
+    public Object remove() {
+        Object elementOld = elements[size--];
+        elements[size] = null;
         return elementOld;
     }
 
-    public int size(){
-       return size;
+    public Object remove(int index) {
+        rangeCheck(index);
+        Object elementOld = elements[index];
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+        size--;
+        return elementOld;
     }
 
-    public boolean isEmpty(){
-       return size == 0;
+    public int size() {
+        return size;
     }
 
-    public void clear(){
-
+    public boolean isEmpty() {
+        return size == 0;
     }
 
-    public Object get(int index){
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            elements[i] = null;
+        }
+        size = 0;
+    }
+
+    public Object get(int index) {
         rangeCheck(index);
         return elements[index];
     }
 
-    public int indexOf(Object value){
+    public int indexOf(Object value) {
+        for (int i = 0; i < size; i++) {
+            if (value.equals(elements[i])) {
+                return i;
+            }
+        }
         return -1;
     }
 
-    public int lastIndexOf(Object value){
+    public int lastIndexOf(Object value) {
+
+        for (int i = size - 1; i >= 0; i--) {
+            if (value.equals(elements[i])) {
+                return i;
+            }
+        }
         return -1;
     }
 
-    public boolean contains(Object value){
-        return false;
+    public boolean contains(Object value) {
+        return indexOf(value) > 0;
     }
 
-    private void rangeCheck(int index){
-        if(index > size ) {
-            throw new IndexOutOfBoundsException("Index: "+ index +", Size: "+ size);
+    private void rangeCheck(int index) {
+        if (index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
 
-    private void rangeCheckAdd(int index){
-        if(index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Index: "+ index +", Size: "+ size);
-        }
-    }
+    private void increase() {
 
-    private void increase(int capacity) {
-        if(capacity > this.capacity)
-        {
-            this.capacity *= INCRFEASING_COEFFICIENT;
+        this.capacity *= INCREASING_COEFFICIENT;
+        Object[] newElements = new Object[this.capacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
         }
+        elements = newElements;
     }
 
     private void checkCapacity(int capacity) {
-
+        if (capacity > MAX_ARRAY_SIZE) {
+            throw new OutOfMemoryError();
+        }
+        if (capacity >= elements.length) {
+            increase();
+        }
     }
+
 }
