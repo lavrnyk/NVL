@@ -86,14 +86,12 @@ public class NumberConverter {
         return result;
     }
     //3
-
     public static String toStr(double income) {
         String result = "";
         boolean isNegative = false;
         if (Double.compare(income, 0.0) < 0) {
             isNegative = true;
         }
-
         if (income == 0.0) {
             if (isNegative) {
                 result = "-0.0";
@@ -102,7 +100,7 @@ public class NumberConverter {
             }
             return result;
         }
-        income = Math.abs(income);//-1
+        income = Math.abs(income);
 
         long log = (long) Math.log10(income);
         long weight = (long) Math.pow(10, log);
@@ -133,7 +131,6 @@ public class NumberConverter {
         }
         return result;
     }
-
     //4
     public static double toDouble(String value) {
         long itterator = 0;
@@ -141,7 +138,6 @@ public class NumberConverter {
         int startFrom = 0;
         int dotPos = value.length();
         double sign = 1;
-
 
         if (value.charAt(0) == '-') {
             sign = -1;
