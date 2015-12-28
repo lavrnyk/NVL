@@ -151,12 +151,12 @@ public class LinkedList implements List {
         }
     }
 
-    private static class Node {
-        Object value;
+    private static class Node<E> {
+        E value;
         Node next;
         Node prev;
 
-        Node(Object value) {
+        Node(E value) {
             this.value = value;
         }
     }

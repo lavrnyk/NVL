@@ -4,11 +4,12 @@ package ua.com.omiftakhov.arraysManipulationAndCo;
  * Created by omiftakhov on 28.12.2015.
  */
 public class ArrayList implements List {
-    private Object[] array=new Object[2];
+    private Object[] array = new Object[2];
     private int size;
+
     @Override
     public void add(Object value) {
-        add(size,value);
+        add(size, value);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ArrayList implements List {
 
     @Override
     public boolean isEmpty() {
-        return size==0?true:false;
+        return size == 0 ? true : false;
     }
 
     @Override
@@ -87,7 +88,7 @@ public class ArrayList implements List {
 
     @Override
     public boolean contains(Object value) {
-        return indexOf(value)==-1?false:true;
+        return indexOf(value) == -1 ? false : true;
     }
 
     private void validateIndex(int index) {
