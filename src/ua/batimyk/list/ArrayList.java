@@ -15,15 +15,15 @@ public class ArrayList implements List {
     Object[] elements = new Object[capacity];
 
     public void add(Object value) {
-        rangeCheck(size);
-        checkCapacity(size);
+        //rangeCheck(size);
+        checkCapacity(size+1);
         elements[size] = value;
         size++;
     }
 
     public void add(int index, Object value) {
-        rangeCheck(size);
-        checkCapacity(size);
+       // rangeCheck(size);
+        checkCapacity(index);
         size++;
 
         for (int i = size; i > index; i--) {
@@ -39,19 +39,19 @@ public class ArrayList implements List {
         return elementOld;
     }
 
-    public Object remove() {
-        Object elementOld = elements[size--];
-        elements[size] = null;
-        return elementOld;
+    public boolean remove(Object value) {
+        int index = indexOf(value);
+        if (index >= 0) {
+            resizeAndRemove(index);
+            return true;
+        }
+        return false;
     }
 
     public Object remove(int index) {
         rangeCheck(index);
         Object elementOld = elements[index];
-        for (int i = index; i < size - 1; i++) {
-            elements[i] = elements[i + 1];
-        }
-        size--;
+        resizeAndRemove(index);
         return elementOld;
     }
 
@@ -99,7 +99,7 @@ public class ArrayList implements List {
     }
 
     private void rangeCheck(int index) {
-        if (index > size) {
+        if (index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
@@ -111,6 +111,20 @@ public class ArrayList implements List {
         for (int i = 0; i < size; i++) {
             newElements[i] = elements[i];
         }
+        elements = newElements;
+    }
+
+    private void resizeAndRemove(int index) {
+
+        Object[] newElements = new Object[size - 1];
+        for(int i = 0; i < index; i++) {
+            newElements[i] = elements[i];
+        }
+        for(int i = index ; i < size - 1; i++)
+        {
+            newElements[i] = elements[i+1];
+        }
+        size--;
         elements = newElements;
     }
 

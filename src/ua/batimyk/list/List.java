@@ -11,9 +11,9 @@ public interface List {
 
     Object set(int index, Object value);
 
-    Object remove();
-
     Object remove(int index);
+
+    boolean remove(Object value);
 
     int size();
 
