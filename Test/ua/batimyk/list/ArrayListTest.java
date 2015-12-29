@@ -27,6 +27,20 @@ public class ArrayListTest {
         Assert.assertEquals(12345L, listLong.get(0));
         Assert.assertEquals(1234567890L, listLong.get(1));
         Assert.assertNotEquals(1, listLong.get(0));
+        list.clear();
+        int tempSize = 1000;
+        for(int i = 0; i < tempSize; i++) {
+            list.add("i"+i);
+        }
+        for(int i = 0; i < tempSize;i++) {
+            Assert.assertEquals("i" + i, list.get(i));
+        }
+        for(int i = 0; i < tempSize; i++) {
+            list.add("i"+i);
+        }
+        for(int i = tempSize; i < list.size();i++) {
+            Assert.assertEquals("i" + (i- tempSize), list.get(i));
+        }
     }
 
     @Test
@@ -103,33 +117,85 @@ public class ArrayListTest {
     public void testIsEmpty() throws Exception {
         ArrayList list = new ArrayList();
         Assert.assertTrue(list.isEmpty());
-
-
+        int tempSize = 1000;
+        for (int i = 0; i < tempSize; i++) {
+            list.add(i);
+        }
+        for (int i = 0; i < tempSize; i++) {
+            list.remove(0);
+        }
+        Assert.assertTrue(list.isEmpty());
     }
 
     @Test
     public void testClear() throws Exception {
-
+        ArrayList list = new ArrayList();
+        int tempSize = 1000;
+        for (int i = 0; i < tempSize; i++) {
+            list.add(i);
+        }
+        list.clear();
+        Assert.assertTrue(list.isEmpty());
+        Assert.assertEquals(0, list.size());
+        for (int i = 0; i < tempSize; i++) {
+            list.add("i"+i);
+        }
+        list.clear();
+        Assert.assertTrue(list.isEmpty());
     }
 
     @Test
     public void testGet() throws Exception {
+        ArrayList list = new ArrayList();
+        int tempSize = 1000;
+        for (int i = 0; i < tempSize; i++) {
+            list.add("i"+i);
+        }
+        for(int i = 0; i < list.size(); i++)
+        {
+            Assert.assertEquals("i"+i, list.get(i));
+        }
 
     }
 
     @Test
     public void testIndexOf() throws Exception {
-
+        ArrayList list = new ArrayList();
+        int tempSize = 1000;
+        for (int i = 0; i < tempSize; i++) {
+            list.add(null);
+        }
+        Assert.assertEquals(0, list.indexOf(null));
+        list.set(500, 12345L);
+        Assert.assertEquals(500, list.indexOf(12345L));
+        Assert.assertEquals(-1, list.indexOf("abcd"));
     }
 
     @Test
     public void testLastIndexOf() throws Exception {
+        ArrayList list = new ArrayList();
+        int tempSize = 1000;
+        for (int i = 0; i < tempSize; i++) {
+            list.add(null);
+        }
+        Assert.assertEquals(tempSize-1, list.lastIndexOf(null));
+        list.set(500, 12345L);
+        Assert.assertEquals(500, list.lastIndexOf(12345L));
+        Assert.assertEquals(-1, list.lastIndexOf("abcd"));
 
     }
 
     @Test
     public void testContains() throws Exception {
-
+        ArrayList list = new ArrayList();
+        int tempSize = 1000;
+        for (int i = 0; i < tempSize; i++) {
+            list.add(null);
+        }
+        Assert.assertTrue(list.contains(null));
+        list.set(500, 12345L);
+        Assert.assertTrue(list.contains(12345L));
+        Assert.assertFalse(list.contains("abcd"));
     }
 
 }

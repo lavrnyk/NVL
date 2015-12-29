@@ -16,13 +16,13 @@ public class ArrayList implements List {
 
     public void add(Object value) {
         //rangeCheck(size);
-        checkCapacity(size+1);
+        checkCapacity(size + 1);
         elements[size] = value;
         size++;
     }
 
     public void add(int index, Object value) {
-       // rangeCheck(size);
+        // rangeCheck(size);
         checkCapacity(index);
         size++;
 
@@ -76,26 +76,42 @@ public class ArrayList implements List {
     }
 
     public int indexOf(Object value) {
-        for (int i = 0; i < size; i++) {
-            if (value.equals(elements[i])) {
-                return i;
+        if (value == null) {
+            for (int i = 0; i < size; i++) {
+                if (elements[i] == value) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (value.equals(elements[i])) {
+                    return i;
+                }
             }
         }
         return -1;
     }
 
     public int lastIndexOf(Object value) {
-
-        for (int i = size - 1; i >= 0; i--) {
-            if (value.equals(elements[i])) {
-                return i;
+        if (value == null) {
+            for (int i = size - 1; i >= 0; i--) {
+                if (elements[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = size - 1; i >= 0; i--) {
+                if (value.equals(elements[i])) {
+                    return i;
+                }
             }
         }
         return -1;
     }
 
     public boolean contains(Object value) {
-        return indexOf(value) > 0;
+
+        return indexOf(value) >= 0;
     }
 
     private void rangeCheck(int index) {
@@ -117,12 +133,11 @@ public class ArrayList implements List {
     private void resizeAndRemove(int index) {
 
         Object[] newElements = new Object[size - 1];
-        for(int i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++) {
             newElements[i] = elements[i];
         }
-        for(int i = index ; i < size - 1; i++)
-        {
-            newElements[i] = elements[i+1];
+        for (int i = index; i < size - 1; i++) {
+            newElements[i] = elements[i + 1];
         }
         size--;
         elements = newElements;
