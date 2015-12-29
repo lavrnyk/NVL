@@ -14,6 +14,7 @@ public class ArrayList implements List {
 
     Object[] elements = new Object[capacity];
 
+    @Override
     public void add(Object value) {
         //rangeCheck(size);
         checkCapacity(size + 1);
@@ -21,6 +22,7 @@ public class ArrayList implements List {
         size++;
     }
 
+    @Override
     public void add(int index, Object value) {
         // rangeCheck(size);
         checkCapacity(index);
@@ -32,6 +34,7 @@ public class ArrayList implements List {
         elements[index] = value;
     }
 
+    @Override
     public Object set(int index, Object value) {
         rangeCheck(index);
         Object elementOld = elements[index];
@@ -39,6 +42,7 @@ public class ArrayList implements List {
         return elementOld;
     }
 
+    @Override
     public boolean remove(Object value) {
         int index = indexOf(value);
         if (index >= 0) {
@@ -48,6 +52,7 @@ public class ArrayList implements List {
         return false;
     }
 
+    @Override
     public Object remove(int index) {
         rangeCheck(index);
         Object elementOld = elements[index];
@@ -55,14 +60,17 @@ public class ArrayList implements List {
         return elementOld;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public void clear() {
         for (int i = 0; i < size; i++) {
             elements[i] = null;
@@ -70,11 +78,13 @@ public class ArrayList implements List {
         size = 0;
     }
 
+    @Override
     public Object get(int index) {
         rangeCheck(index);
         return elements[index];
     }
 
+    @Override
     public int indexOf(Object value) {
         if (value == null) {
             for (int i = 0; i < size; i++) {
@@ -92,6 +102,7 @@ public class ArrayList implements List {
         return -1;
     }
 
+    @Override
     public int lastIndexOf(Object value) {
         if (value == null) {
             for (int i = size - 1; i >= 0; i--) {
@@ -109,6 +120,7 @@ public class ArrayList implements List {
         return -1;
     }
 
+    @Override
     public boolean contains(Object value) {
 
         return indexOf(value) >= 0;
@@ -120,6 +132,7 @@ public class ArrayList implements List {
         }
     }
 
+
     private void increase() {
 
         this.capacity *= INCREASING_COEFFICIENT;
@@ -129,6 +142,7 @@ public class ArrayList implements List {
         }
         elements = newElements;
     }
+
 
     private void resizeAndRemove(int index) {
 
@@ -142,6 +156,7 @@ public class ArrayList implements List {
         size--;
         elements = newElements;
     }
+
 
     private void checkCapacity(int capacity) {
         if (capacity > MAX_ARRAY_SIZE) {
