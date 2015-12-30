@@ -16,7 +16,6 @@ public class ArrayList implements List {
 
     @Override
     public void add(Object value) {
-        //rangeCheck(size);
         checkCapacity(size + 1);
         elements[size] = value;
         size++;
@@ -24,7 +23,7 @@ public class ArrayList implements List {
 
     @Override
     public void add(int index, Object value) {
-        // rangeCheck(size);
+        indexAddCheck(index);
         checkCapacity(index);
         size++;
 
@@ -36,7 +35,7 @@ public class ArrayList implements List {
 
     @Override
     public Object set(int index, Object value) {
-        rangeCheck(index);
+        indexCheck(index);
         Object elementOld = elements[index];
         elements[index] = value;
         return elementOld;
@@ -54,7 +53,7 @@ public class ArrayList implements List {
 
     @Override
     public Object remove(int index) {
-        rangeCheck(index);
+        indexCheck(index);
         Object elementOld = elements[index];
         resizeAndRemove(index);
         return elementOld;
@@ -80,7 +79,7 @@ public class ArrayList implements List {
 
     @Override
     public Object get(int index) {
-        rangeCheck(index);
+        indexCheck(index);
         return elements[index];
     }
 
@@ -126,8 +125,14 @@ public class ArrayList implements List {
         return indexOf(value) >= 0;
     }
 
-    private void rangeCheck(int index) {
+    private void indexCheck(int index) {
         if (index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+    }
+
+    private void indexAddCheck(int index) {
+        if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }

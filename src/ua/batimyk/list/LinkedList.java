@@ -82,6 +82,12 @@ public class LinkedList implements List {
        size++;
     }
 
+    private void rangeCheck(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+    }
+
     public static class Node {
         Object item;
         Node next;

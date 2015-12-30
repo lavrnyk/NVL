@@ -50,10 +50,20 @@ public class ArrayListTest {
         list.add(0, "a1");
         list.add(0, "a2");
         list.add(3, 12345L);
+
+
         Assert.assertEquals("a0", list.get(2));
         Assert.assertEquals("a1", list.get(1));
         Assert.assertEquals("a2", list.get(0));
         Assert.assertEquals(12345L, list.get(3));
+
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testIndexOutOfBoundsException() {
+        ArrayList list = new ArrayList();
+        list.add(1, 12L);
+        list.add(5, 12L);
     }
 
     @Test
