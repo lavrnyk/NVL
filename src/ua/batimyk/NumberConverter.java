@@ -79,7 +79,7 @@ public class NumberConverter {
             s.append(".");
 
             double precision = (10e-13) * Math.pow(10, n);
-            double fractionWeight = 10;
+
 
             while(remainder > 0.01 && remainder > precision )
             {

@@ -106,6 +106,7 @@ public class ArrayListTest {
         }
         Assert.assertEquals("a" + tempSize / 2, list.get(0));
         Assert.assertEquals("a" + (tempSize - 1), list.get(Math.round((tempSize - 1) / 2)));
+
     }
 
     @Test
@@ -176,8 +177,11 @@ public class ArrayListTest {
             list.add(null);
         }
         Assert.assertEquals(0, list.indexOf(null));
+        Assert.assertEquals(tempSize - 1, list.lastIndexOf(null));
         list.set(500, 12345L);
-        Assert.assertEquals(500, list.indexOf(12345L));
+        Assert.assertEquals(500, list.lastIndexOf(12345L));
+        list.set(999, "aaaaa");
+        Assert.assertEquals(999, list.lastIndexOf("aaaaa"));
         Assert.assertEquals(-1, list.indexOf("abcd"));
     }
 
@@ -191,6 +195,8 @@ public class ArrayListTest {
         Assert.assertEquals(tempSize-1, list.lastIndexOf(null));
         list.set(500, 12345L);
         Assert.assertEquals(500, list.lastIndexOf(12345L));
+        list.set(0, "aaaaa");
+        Assert.assertEquals(0, list.lastIndexOf( "aaaaa"));
         Assert.assertEquals(-1, list.lastIndexOf("abcd"));
 
     }

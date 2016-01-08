@@ -186,47 +186,4 @@ public class TwentyMethods {
         }
         return false;
     }
-
-    static boolean isEqual(char[] array, char[] subArray) {
-        int subArrayLength = subArray.length;     // using couple of times - easier to calc it
-        boolean isEqual = false;
-
-        if (subArrayLength == 0 || subArrayLength > array.length) {
-            isEqual = false;
-            return isEqual;
-        }
-//            System.out.println(array);
-//            System.out.println(subArray);
-        int limit = array.length - subArrayLength;
-
-        for (int i = 0; i <= limit; i++) {
-            if (subArray[0] == array[i])
-                isEqual = true;
-
-            {
-                for (int j = 1; j < subArrayLength && i < subArrayLength; j++) {
-
-//                        System.out.println(i+1 + "    " + j);
-//                        System.out.println(subArray[j] + "   " + array[i+1]);
-                    if (subArray[j] != array[i + j]) {
-                        isEqual = false;
-                        break;
-                    } else {
-                        isEqual = true;
-                    }
-
-                }
-            }
-        }
-        return isEqual;
-
-    }
-
-    public static void main(String[] args) {
-        System.out.println(contains(new char[]{'a', 'a', 'a', 'a', 'b', 'c'},
-                new char[]{'a', 'a', 'b', 'c'}
-
-        ));
-    }
-
 }

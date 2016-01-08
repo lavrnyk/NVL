@@ -5,14 +5,15 @@ package ua.batimyk.list;
  */
 public class ArrayList implements List {
 
-    private int size = 0;
+
     private static final int INITIAL_CAPACITY = 10;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private static final float INCREASING_COEFFICIENT = 1.5f;
 
     protected int capacity = INITIAL_CAPACITY;
 
-    Object[] elements = new Object[capacity];
+    private Object[] elements = new Object[capacity];
+    private int size = 0;
 
     @Override
     public void add(Object value) {
@@ -27,9 +28,7 @@ public class ArrayList implements List {
         checkCapacity(index);
         size++;
 
-        for (int i = size; i > index; i--) {
-            elements[i] = elements[i - 1];
-        }
+        System.arraycopy(elements, index, elements, index + 1, size - index);
         elements[index] = value;
     }
 
@@ -87,7 +86,7 @@ public class ArrayList implements List {
     public int indexOf(Object value) {
         if (value == null) {
             for (int i = 0; i < size; i++) {
-                if (elements[i] == value) {
+                if (elements[i] == null) {
                     return i;
                 }
             }
@@ -142,9 +141,7 @@ public class ArrayList implements List {
 
         this.capacity *= INCREASING_COEFFICIENT;
         Object[] newElements = new Object[this.capacity];
-        for (int i = 0; i < size; i++) {
-            newElements[i] = elements[i];
-        }
+        System.arraycopy(elements, 0, newElements, 0, size);
         elements = newElements;
     }
 
@@ -152,12 +149,7 @@ public class ArrayList implements List {
     private void resizeAndRemove(int index) {
 
         Object[] newElements = new Object[size - 1];
-        for (int i = 0; i < index; i++) {
-            newElements[i] = elements[i];
-        }
-        for (int i = index; i < size - 1; i++) {
-            newElements[i] = elements[i + 1];
-        }
+        System.arraycopy(elements, index + 1, newElements, index, size - 1 - index);
         size--;
         elements = newElements;
     }
