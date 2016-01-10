@@ -12,7 +12,6 @@ public class LinkedList implements List {
 
     @Override
     public void add(Object value) {
-
         linkLast(value);
     }
 
@@ -39,34 +38,15 @@ public class LinkedList implements List {
 
     @Override
     public Object remove(int index) {
-        indexCheck(index);
-        Node node = getNode(index);
-        Object oldValue = node.item;
-        if (index == 0) {
-            first = node.next;
-        } else if (index == size - 1) {
-            last = node.prev;
-        } else {
-
-            Node next = node.next;
-            Node prev = node.prev;
-            next.prev = prev.next;
-        }
-
-        node.item = null;
-        node.next = null;
-        node.prev = null;
-
-        size--;
-        return oldValue;
+        return unlink(getNode(index));
     }
 
     @Override
     public boolean remove(Object value) {
         int index = indexOf(value);
-        if(index >= 0) {
-           remove(index);
-           return true;
+        if (index >= 0) {
+            remove(index);
+            return true;
         }
         return false;
     }
@@ -93,7 +73,6 @@ public class LinkedList implements List {
         first = null;
         last = null;
         size = 0;
-
     }
 
     @Override
@@ -105,19 +84,18 @@ public class LinkedList implements List {
     public int indexOf(Object value) {
         Node node = first;
         if (value == null) {
-            for (int i = 0 ; i < size; i++) {
+            for (int i = 0; i < size; i++) {
                 if (node.item == null) {
                     return i;
                 }
-                node = node.next;
+                node = getNext(node);
             }
-        } else
-        {
-            for (int i = 0 ; i < size ; i++) {
-                if(value.equals(node.item)) {
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (value.equals(node.item)) {
                     return i;
                 }
-                node = node.next;
+                node = getNext(node);
             }
         }
         return -1;
@@ -127,19 +105,18 @@ public class LinkedList implements List {
     public int lastIndexOf(Object value) {
         Node node = last;
         if (value == null) {
-            for (int i = size - 1 ; i >= 0; i--) {
+            for (int i = size - 1; i >= 0; i--) {
                 if (node.item == null) {
                     return i;
                 }
-                node = node.prev;
+                node = getPrev(node);
             }
-        } else
-        {
-            for (int i = size - 1 ; i >= 0; i--) {
-                if(value.equals(node.item)) {
+        } else {
+            for (int i = size - 1; i >= 0; i--) {
+                if (value.equals(node.item)) {
                     return i;
                 }
-                node = node.prev;
+                node = getPrev(node);
             }
         }
         return -1;
@@ -175,29 +152,61 @@ public class LinkedList implements List {
 
     }
 
+    private Object unlink(Node node) {
+        Object oldValue = node.item;
+        Node next = node.next;
+        Node prev = node.prev;
+
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+            node.prev = null;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
+            node.next = null;
+        }
+
+        node.item = null;
+        size--;
+
+        return oldValue;
+    }
+
+
     private void indexCheck(int index) {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
 
-    private boolean hasNext(Node node) {
-        return !(node == last || node == null);
-    }
-
     private Node getNext(Node node) {
+
         return node.next;
     }
 
     private Node getPrev(Node node) {
+
         return node.prev;
     }
 
     private Node getNode(int index) {
         indexCheck(index);
-        Node node = first;
-        for (int i = 0; i < index; i++) {
-            node = getNext(node);
+        Node node;
+        if (index < (size / 2)) {
+            node = first;
+            for (int i = 0; i < index; i++) {
+                node = getNext(node);
+            }
+        } else {
+            node = last;
+            for (int i = size - 1; i > index; i--) {
+                node = getPrev(node);
+            }
         }
         return node;
     }
@@ -211,23 +220,6 @@ public class LinkedList implements List {
             this.item = item;
             this.next = next;
             this.prev = prev;
-        }
-    }
-
-    public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-
-        list.add(0, "a1");
-        list.add(1, "a2");
-        list.add(2, "a3");
-        list.add(3, "a2");
-        list.add(4, "aaaa");
-        list.add(5, 1000L);
-
-        // System.out.println(list.get(list.size() - 1));
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
         }
     }
 }

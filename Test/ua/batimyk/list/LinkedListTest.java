@@ -107,6 +107,13 @@ public class LinkedListTest {
         }
         Assert.assertEquals("a" + tempSize / 2, list.get(0));
         Assert.assertEquals("a" + (tempSize - 1), list.get(Math.round((tempSize - 1) / 2)));
+        for (int i = 0; i < tempSize ; i++) {
+            list.add(0,"b" + i);
+        }
+        for (int i = 0; i < tempSize ; i++) {
+            Assert.assertEquals("b" + (tempSize - 1 - i), list.get(i));
+        }
+
     }
 
     @Test
