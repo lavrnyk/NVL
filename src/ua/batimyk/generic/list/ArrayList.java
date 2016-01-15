@@ -1,11 +1,10 @@
-package ua.batimyk.list;
+package ua.batimyk.generic.list;
 
 /**
- * Created by ${USER} on ${DATE}.
+ * Created by N on 01/11/16.
  * NVL
  */
-public class ArrayList implements List {
-
+public class ArrayList<E> implements List<E> {
 
     private static final int INITIAL_CAPACITY = 10;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
@@ -13,50 +12,51 @@ public class ArrayList implements List {
 
     private int capacity = INITIAL_CAPACITY;
 
-    private Object[] elements = new Object[capacity];
+    @SuppressWarnings("unchecked")
+    private E[] elements = (E[]) new Object[capacity];
     private int size = 0;
 
     @Override
-    public void add(Object value) {
+    public void add(E element) {
         checkCapacity(size + 1);
-        elements[size] = value;
+        elements[size] = element;
         size++;
     }
 
     @Override
-    public void add(int index, Object value) {
+    public void add(int index, E element) {
         indexAddCheck(index);
         checkCapacity(index);
         size++;
 
         System.arraycopy(elements, index, elements, index + 1, size - index);
-        elements[index] = value;
+        elements[index] = element;
     }
 
     @Override
-    public Object set(int index, Object value) {
+    public E set(int index, E element) {
         indexCheck(index);
-        Object elementOld = elements[index];
-        elements[index] = value;
+        E elementOld = elements[index];
+        elements[index] = element;
         return elementOld;
     }
 
     @Override
-    public boolean remove(Object value) {
-        int index = indexOf(value);
+    public E remove(int index) {
+        indexCheck(index);
+        E elementOld = elements[index];
+        resizeAndRemove(index);
+        return elementOld;
+    }
+
+    @Override
+    public boolean remove(E element) {
+        int index = indexOf(element);
         if (index >= 0) {
             resizeAndRemove(index);
             return true;
         }
         return false;
-    }
-
-    @Override
-    public Object remove(int index) {
-        indexCheck(index);
-        Object elementOld = elements[index];
-        resizeAndRemove(index);
-        return elementOld;
     }
 
     @Override
@@ -78,14 +78,13 @@ public class ArrayList implements List {
     }
 
     @Override
-    public Object get(int index) {
-        indexCheck(index);
+    public E get(int index) {
         return elements[index];
     }
 
     @Override
-    public int indexOf(Object value) {
-        if (value == null) {
+    public int indexOf(E element) {
+        if (element == null) {
             for (int i = 0; i < size; i++) {
                 if (elements[i] == null) {
                     return i;
@@ -93,7 +92,7 @@ public class ArrayList implements List {
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (value.equals(elements[i])) {
+                if (element.equals(elements[i])) {
                     return i;
                 }
             }
@@ -102,8 +101,8 @@ public class ArrayList implements List {
     }
 
     @Override
-    public int lastIndexOf(Object value) {
-        if (value == null) {
+    public int lastIndexOf(E element) {
+        if (element == null) {
             for (int i = size - 1; i >= 0; i--) {
                 if (elements[i] == null) {
                     return i;
@@ -111,7 +110,7 @@ public class ArrayList implements List {
             }
         } else {
             for (int i = size - 1; i >= 0; i--) {
-                if (value.equals(elements[i])) {
+                if (element.equals(elements[i])) {
                     return i;
                 }
             }
@@ -120,9 +119,8 @@ public class ArrayList implements List {
     }
 
     @Override
-    public boolean contains(Object value) {
-
-        return indexOf(value) >= 0;
+    public boolean contains(E element) {
+        return indexOf(element) >= 0;
     }
 
     private void indexCheck(int index) {
@@ -137,24 +135,14 @@ public class ArrayList implements List {
         }
     }
 
-
+    @SuppressWarnings("unchecked")
     private void increase() {
 
         this.capacity *= INCREASING_COEFFICIENT;
-        Object[] newElements = new Object[this.capacity];
+        E[] newElements = (E[]) new Object[this.capacity];
         System.arraycopy(elements, 0, newElements, 0, size);
         elements = newElements;
     }
-
-
-    private void resizeAndRemove(int index) {
-
-        Object[] newElements = new Object[size - 1];
-        System.arraycopy(elements, index + 1, newElements, index, size - 1 - index);
-        size--;
-        elements = newElements;
-    }
-
 
     private void checkCapacity(int capacity) {
         if (capacity > MAX_ARRAY_SIZE) {
@@ -163,6 +151,23 @@ public class ArrayList implements List {
         if (capacity >= elements.length) {
             increase();
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void resizeAndRemove(int index) {
+
+        E[] newElements = (E[]) new Object[size - 1];
+        System.arraycopy(elements, index + 1, newElements, index, size - 1 - index);
+        size--;
+        elements = newElements;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Long> list = new ArrayList<>();
+        list.add(1234L);
+        long l = list.get(0);
+
+        System.out.println(l);
     }
 
 }

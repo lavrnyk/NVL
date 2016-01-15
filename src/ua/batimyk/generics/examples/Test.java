@@ -1,9 +1,10 @@
-package ua.batimyk.generics;
+package ua.batimyk.generics.examples;
 
 import java.util.List;
 
 /**
  * Created by mbatitskiy on 23-Dec-15.
+ * NVL
  */
 public class Test {
     public static void main(String[] args) {

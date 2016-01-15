@@ -6,9 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 */
-/**
- * Created by mbatitskiy on 23-Dec-15.
- *//*
+/*
 
 public class Test {
     public static void main(String[] args) {

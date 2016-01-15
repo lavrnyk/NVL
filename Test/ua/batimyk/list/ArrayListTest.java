@@ -6,6 +6,7 @@ import org.junit.Test;
 
 /**
  * Created by mbatitskiy on 25-Dec-15.
+ * NVL
  */
 public class ArrayListTest {
 
@@ -60,10 +61,16 @@ public class ArrayListTest {
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    public void testIndexOutOfBoundsException() {
+    public void testIndexOutOfBoundsExceptionSet() {
+        ArrayList list = new ArrayList();
+        list.set(0,"b");
+
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testIndexOutOfBoundsExceptionAdd() {
         ArrayList list = new ArrayList();
         list.add(1, 12L);
-        list.add(5, 12L);
     }
 
     @Test
