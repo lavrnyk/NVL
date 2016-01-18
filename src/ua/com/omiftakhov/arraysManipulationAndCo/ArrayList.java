@@ -3,17 +3,18 @@ package ua.com.omiftakhov.arraysManipulationAndCo;
 /**
  * Created by omiftakhov on 28.12.2015.
  */
-public class ArrayList implements List {
+public class ArrayList implements List{
     private Object[] array = new Object[2];
     private int size;
 
     @Override
     public void add(Object value) {
-        add(size, value);
+
+         add(size, value);
     }
 
     @Override
-    public void add(int index, Object value) {
+    public void add (int index, Object value) {
         if (index != size) {
             validateIndex(index);
         }
@@ -93,7 +94,7 @@ public class ArrayList implements List {
 
     private void validateIndex(int index) {
         if (index < 0 || index >= size) {
-            String message = "Index = " + index + "," + "should be between 0 and " + size;
+            String message = "Index = " + index + "," + "should be between 0 and " + (size-1);
             throw new IndexOutOfBoundsException(message);
         }
     }
