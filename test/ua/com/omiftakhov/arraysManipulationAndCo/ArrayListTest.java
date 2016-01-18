@@ -8,7 +8,7 @@ public class ArrayListTest  extends ListTest {
     @Override
     @Before
     public void setUp() throws Exception {
-        list= new ArrayList();
+        list = new ArrayList();
 
     }
 }
