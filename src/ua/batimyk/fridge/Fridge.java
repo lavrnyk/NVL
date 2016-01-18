@@ -5,7 +5,7 @@ package ua.batimyk.fridge;
  */
 public class Fridge {
 
-    private int[][] positions = {
+    private byte[][] positions = {
             {1, 1, 1, 1}
             , {1, 1, 1, 1}
             , {1, 1, 1, 1}
@@ -15,9 +15,9 @@ public class Fridge {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int[] xAxis : positions) {
+        for (byte[] xAxis : positions) {
             s.append('\n');
-            for (int handlerState : xAxis) {
+            for (byte handlerState : xAxis) {
                 if (handlerState == 1) {
                     s.append("1");
                 } else if (handlerState == -1) {
@@ -31,7 +31,7 @@ public class Fridge {
     public Fridge() {
     }
 
-    public Fridge(int[][] positions) {
+    public Fridge(byte[][] positions) {
         this.positions = positions;
     }
 
@@ -48,18 +48,18 @@ public class Fridge {
         return Fridge.this;
     }
 
-    public void setPositions(int[][] positions) {
+    public void setPositions(byte[][] positions) {
         this.positions = positions;
     }
 
-    public int[][] getPositions() {
+    public byte[][] getPositions() {
         return this.positions;
     }
 
     public boolean isOpen() {
 
-        for (int[] yAxis : getPositions()) {
-            for (int handlerState : yAxis) {
+        for (byte[] yAxis : getPositions()) {
+            for (byte handlerState : yAxis) {
                 if (handlerState != 1) {
                     return false;
                 }

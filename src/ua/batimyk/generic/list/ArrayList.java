@@ -1,5 +1,7 @@
 package ua.batimyk.generic.list;
 
+import java.util.Properties;
+
 /**
  * Created by N on 01/11/16.
  * NVL
@@ -18,7 +20,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void add(E element) {
-        checkCapacity(size + 1);
+        validateCapacity(size + 1);
         elements[size] = element;
         size++;
     }
@@ -26,7 +28,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public void add(int index, E element) {
         indexAddCheck(index);
-        checkCapacity(index);
+        validateCapacity(index);
         size++;
 
         System.arraycopy(elements, index, elements, index + 1, size - index);
@@ -144,7 +146,7 @@ public class ArrayList<E> implements List<E> {
         elements = newElements;
     }
 
-    private void checkCapacity(int capacity) {
+    private void validateCapacity(int capacity) {
         if (capacity > MAX_ARRAY_SIZE) {
             throw new OutOfMemoryError();
         }
@@ -161,13 +163,4 @@ public class ArrayList<E> implements List<E> {
         size--;
         elements = newElements;
     }
-
-    public static void main(String[] args) {
-        ArrayList<Long> list = new ArrayList<>();
-        list.add(1234L);
-        long l = list.get(0);
-
-        System.out.println(l);
-    }
-
 }

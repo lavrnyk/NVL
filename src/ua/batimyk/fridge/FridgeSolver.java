@@ -45,14 +45,14 @@ public class FridgeSolver {
     }
 
     public static void main(String[] args) {
-        int[][] initPositions = {
+        byte[][] initPositions = {
                 {1, 1, -1, 1}
                 , {1, 1, -1, 1}
                 , {-1, -1, 1, -1}
                 , {1, 1, 1, -1}
         };
 
-        int[][] initPosForOneMove = {
+        byte[][] initPosForOneMove = {
                 {1, 1, -1, 1}
                 , {1, 1, -1, 1}
                 , {-1, -1, -1, -1}

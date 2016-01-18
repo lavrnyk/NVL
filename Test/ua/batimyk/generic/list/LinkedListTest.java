@@ -3,8 +3,6 @@ package ua.batimyk.generic.list;
 import org.junit.Assert;
 import org.junit.Test;
 
-
-
 /**
  * Created by N on 01/15/16.
  * NVL

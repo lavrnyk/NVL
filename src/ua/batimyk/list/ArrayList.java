@@ -18,7 +18,7 @@ public class ArrayList implements List {
 
     @Override
     public void add(Object value) {
-        checkCapacity(size + 1);
+        validateCapacity(size + 1);
         elements[size] = value;
         size++;
     }
@@ -26,7 +26,7 @@ public class ArrayList implements List {
     @Override
     public void add(int index, Object value) {
         indexAddCheck(index);
-        checkCapacity(index);
+        validateCapacity(index);
         size++;
 
         System.arraycopy(elements, index, elements, index + 1, size - index);
@@ -156,7 +156,7 @@ public class ArrayList implements List {
     }
 
 
-    private void checkCapacity(int capacity) {
+    private void validateCapacity(int capacity) {
         if (capacity > MAX_ARRAY_SIZE) {
             throw new OutOfMemoryError();
         }
