@@ -15,10 +15,10 @@ public class FileManager {
         return calculateFiles(path, 0);
     }
 
-    @SuppressWarnings("ConstantConditions")
     private static int calculateFiles(String path, int count) {
         File p = new File(path);
-        if(p.exists()) {
+        if (p.exists()) {
+            //noinspection ConstantConditions
             for (File f : p.listFiles()) {
                 if (f.isFile()) {
                     count++;
@@ -37,16 +37,16 @@ public class FileManager {
 
     private static int calculateDirs(String path, int count) {
         File p = new File(path);
-         if (p.exists()) {
-             //noinspection ConstantConditions
-             for (File f : p.listFiles()) {
-                 if (f.isDirectory()) {
-                     count++;
-                     count = calculateDirs(f.toString(), count);
-                 }
-             }
-             return count;
-         }
+        if (p.exists()) {
+            //noinspection ConstantConditions
+            for (File f : p.listFiles()) {
+                if (f.isDirectory()) {
+                    count++;
+                    count = calculateDirs(f.toString(), count);
+                }
+            }
+            return count;
+        }
         return 0;
     }
 
@@ -61,7 +61,7 @@ public class FileManager {
             //noinspection ConstantConditions
             for (File f : pathFrom.listFiles()) {
                 StringBuilder path = new StringBuilder(to);
-                if(f.isDirectory()) {
+                if (f.isDirectory()) {
                     path.append("\\");
                     path.append(f.getName());
                     File pathTo = new File(path.toString());
@@ -88,7 +88,7 @@ public class FileManager {
             //noinspection ConstantConditions
             for (File f : pathFrom.listFiles()) {
                 StringBuilder path = new StringBuilder(to);
-                if(f.isDirectory()) {
+                if (f.isDirectory()) {
                     path.append("\\");
                     path.append(f.getName());
                     File pathTo = new File(path.toString());
@@ -97,7 +97,7 @@ public class FileManager {
                 move(f.toString(), path.toString());
 
             }
-           pathFrom.delete();
+            pathFrom.delete();
         } else {
             System.out.println("Incorrect input directory found: " + pathFrom);
             return false;
