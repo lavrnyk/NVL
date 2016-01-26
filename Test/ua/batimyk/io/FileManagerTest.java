@@ -30,6 +30,7 @@ public class FileManagerTest {
 
     private void deleteDir(File path) {
         if (path.exists()) {
+            //noinspection ConstantConditions
             for (File f : path.listFiles()) {
                 if (f.isDirectory()) {
                     deleteDir(f);
@@ -54,17 +55,13 @@ public class FileManagerTest {
                 StringBuilder filePath = new StringBuilder(path);
                 Random r = new Random();
                 filePath.append("\\file").append(j);
-                FileOutputStream out = null;
-                try {
-                    File fp = new File(filePath.toString());
-                    out = new FileOutputStream(fp);
-                    byte[] buf = new byte[r.nextInt(maxFileSize)+1];
+                File fp = new File(filePath.toString());
+                try (FileOutputStream out = new FileOutputStream(fp)) {
+                    byte[] buf = new byte[r.nextInt(maxFileSize) + 1];
                     out.write(buf);
                     System.out.println(filePath.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    out.close();
                 }
             }
         }
