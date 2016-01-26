@@ -15,6 +15,7 @@ public class FileManager {
         return calculateFiles(path, 0);
     }
 
+    @SuppressWarnings("ConstantConditions")
     private static int calculateFiles(String path, int count) {
         File p = new File(path);
         if(p.exists()) {
@@ -37,6 +38,7 @@ public class FileManager {
     private static int calculateDirs(String path, int count) {
         File p = new File(path);
          if (p.exists()) {
+             //noinspection ConstantConditions
              for (File f : p.listFiles()) {
                  if (f.isDirectory()) {
                      count++;
@@ -56,6 +58,7 @@ public class FileManager {
             copyFile(pathFrom, pathTo);
         } else if (pathFrom.isDirectory()) {
 
+            //noinspection ConstantConditions
             for (File f : pathFrom.listFiles()) {
                 StringBuilder path = new StringBuilder(to);
                 if(f.isDirectory()) {
@@ -82,7 +85,7 @@ public class FileManager {
             pathFrom.delete();
 
         } else if (pathFrom.isDirectory()) {
-
+            //noinspection ConstantConditions
             for (File f : pathFrom.listFiles()) {
                 StringBuilder path = new StringBuilder(to);
                 if(f.isDirectory()) {
