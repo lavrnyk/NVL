@@ -6,6 +6,7 @@ package ua.batimyk.io;
  */
 
 import java.io.*;
+import java.nio.file.Paths;
 
 public class FileManager {
 
@@ -54,7 +55,7 @@ public class FileManager {
         File pathFrom = new File(from);
 
         if (pathFrom.isFile()) {
-            File pathTo = new File(to + "\\" + pathFrom.getName());
+            File pathTo = new File(Paths.get(to,pathFrom.getName()).toString());
             copyFile(pathFrom, pathTo);
         } else if (pathFrom.isDirectory()) {
 
@@ -80,7 +81,7 @@ public class FileManager {
         File pathFrom = new File(from);
 
         if (pathFrom.isFile()) {
-            File pathTo = new File(to + "\\" + pathFrom.getName());
+            File pathTo = new File(Paths.get(to,pathFrom.getName()).toString());
             copyFile(pathFrom, pathTo);
             pathFrom.delete();
 

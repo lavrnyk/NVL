@@ -4,14 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Properties;
+import java.nio.file.Paths;
 import java.util.Random;
-import java.util.StringJoiner;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by N on 01/25/16.
@@ -19,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class FileManagerTest {
 
-    private static final String ROOT_TEST_PATH = System.getProperty("java.io.tmpdir") + "\\" + "io_test_dir";
+    private static final String ROOT_TEST_PATH = Paths.get(System.getProperty("java.io.tmpdir"),"io_test_dir").toString();
     private static final byte MAX_PATH_DEPTH = 3;
     private static final int MAX_FILE_SIZE = 1024 * 1024;
     private static final int FILES_COUNT_PER_DIR = 5;
