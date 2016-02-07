@@ -1,7 +1,6 @@
-package ua.batimyk.io.LogAnalyzer;
+package ua.batimyk.io.log;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -10,16 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class LogToken {
     enum HttpMethod {
-        GET, POST;
-
-        public static HttpMethod getMethod(String value) {
-            for (HttpMethod httpMethod : HttpMethod.values()) {
-                if (value.contains(httpMethod.toString())) {
-                    return httpMethod;
-                }
-            }
-            return null;
-        }
+        GET, POST
     }
 
     private LocalDateTime time;
@@ -42,7 +32,7 @@ public class LogToken {
 
         LocalDateTime time = LocalDateTime.parse("12/Mar/2004:13:25:45 -0800", LogToken.formatter);
 
-        LogToken logToken = new LogToken(time, HttpMethod.getMethod("fsfsf"), "Message");
+        LogToken logToken = new LogToken(time, HttpMethod.valueOf("GET"), "Message");
 
         System.out.println(logToken);
     }

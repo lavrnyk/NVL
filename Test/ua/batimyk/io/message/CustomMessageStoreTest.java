@@ -1,6 +1,5 @@
 package ua.batimyk.io.message;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.BufferedInputStream;

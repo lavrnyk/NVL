@@ -1,4 +1,4 @@
-package ua.batimyk.io.LogAnalyzer;
+package ua.batimyk.io.log;
 
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class LogAnalyzerTest {
         LocalDateTime timeTo = LocalDateTime.parse(sTimeTo, LogToken.formatter);
 
         Collection<LogToken> logTokens = logAnalyzer.scanLog("apache-samples/access_log/access_log", timeFrom, timeTo);
-        assertEquals("2004-03-12T13:25:45 GET GET /SpamAssassin.html HTTP/1.1", logTokens.iterator().next().toString());
+        assertEquals("2004-03-12T13:25:45 GET /SpamAssassin.html HTTP/1.1", logTokens.iterator().next().toString());
 
         sTimeFrom = "12/Mar/2004:13:25:45 -0800";
         sTimeTo = "12/Mar/2004:13:25:44 -0800";

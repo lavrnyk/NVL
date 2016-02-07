@@ -1,4 +1,4 @@
-package ua.batimyk.io.LogAnalyzer;
+package ua.batimyk.io.log;
 
 
 import java.io.*;
@@ -13,12 +13,12 @@ import java.util.regex.Pattern;
  * NVL
  */
 public class LogAnalyzer {
-    private String logPatternString = ".*\\[(.*)\\].*\"(.*)\"";
+    private final static String LOG_PATTERN_STRING = ".*\\[(.*)\\].*\"([A-Z]+)\\s(.*)\"";
 
     public Collection<LogToken> scanLog(String path, LocalDateTime timeFrom, LocalDateTime timeTo) {
 
         Collection<LogToken> logToken = new LinkedList<>();
-        Pattern pattern = Pattern.compile(logPatternString, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(LOG_PATTERN_STRING, Pattern.CASE_INSENSITIVE);
 
         String logEntry;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
@@ -27,8 +27,8 @@ public class LogAnalyzer {
                 if (matcher.find()) {
                     LocalDateTime time = LocalDateTime.parse(matcher.group(1), LogToken.formatter);
                     if (time.compareTo(timeFrom) >= 0 && time.compareTo(timeTo) <= 0) {
-                        String message = matcher.group(2);
-                        logToken.add(new LogToken(time, LogToken.HttpMethod.getMethod(message), message));
+                        String message = matcher.group(3);
+                        logToken.add(new LogToken(time, LogToken.HttpMethod.valueOf(matcher.group(2)), message));
                     }
                 }
             }

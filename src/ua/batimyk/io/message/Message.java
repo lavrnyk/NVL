@@ -8,6 +8,9 @@ import java.util.Date;
  * NVL
  */
 public class Message implements Serializable {
+
+    public static final long serialVersionUID = 1L;
+
     private int id;
     private Date date;
     private String content;
