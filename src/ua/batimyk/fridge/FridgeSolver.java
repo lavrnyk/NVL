@@ -3,7 +3,8 @@ package ua.batimyk.fridge;
 import java.util.*;
 
 /**
- * Created by N on 12/16/15.
+ * Created by NB on 12/16/15.
+ *
  */
 public class FridgeSolver {
 
@@ -16,13 +17,13 @@ public class FridgeSolver {
     // keeps track of possibly eligible states
     private Queue<Fridge> states = new LinkedList<>();
 
-    public Fridge findFirstSolution(Fridge state) {
+    private Fridge findFirstSolution(Fridge state) {
         statesSeen.add(state.toString());
         states.add(state);
         while (!states.isEmpty()) {
             Fridge curState = states.poll();
             if (curStateNumber % 10000 == 0) {
-                System.out.println("Looking at " + curStateNumber + "th state");
+                System.out.println("Looking at " + curStateNumber + "th state, " + statesSeen.size());
             }
             curStateNumber++;
             for (int x = 0; x < curState.getPositions().length; x++) {
@@ -30,6 +31,8 @@ public class FridgeSolver {
                     Fridge newState = curState.turnHandle(x, y);
                     if (statesSeen.contains(newState.toString())) { // newState has already been seen, skipping
                         continue;
+                    } else {
+                        statesSeen.add(newState.toString());
                     }
                     if (newState.isOpen()) {
                         System.out.println("Looked at " + curStateNumber + " states.");
@@ -53,13 +56,13 @@ public class FridgeSolver {
         };
 
         byte[][] initPosForOneMove = {
-                {1, 1, -1, 1}
+                 {1, 1, -1, 1}
                 , {1, 1, -1, 1}
                 , {-1, -1, -1, -1}
                 , {1, 1, -1, 1}
         };
 
-        Fridge fridge = new Fridge(initPosForOneMove);
+        Fridge fridge = new Fridge(initPositions);
         FridgeSolver solveFridge = new FridgeSolver();
         solveFridge.findFirstSolution(fridge);
 

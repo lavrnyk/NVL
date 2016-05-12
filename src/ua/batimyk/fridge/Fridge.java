@@ -1,16 +1,19 @@
 package ua.batimyk.fridge;
 
+import java.util.Arrays;
+
 /**
- * Created by N on 12/16/15.
+ * Created by NB on 12/16/15.
+ *
  */
 public class Fridge {
 
-    private byte[][] positions = {
-            {1, 1, 1, 1}
-            , {1, 1, 1, 1}
-            , {1, 1, 1, 1}
-            , {1, 1, 1, 1}
-    };
+    private byte[][] positions;
+
+    public int getSize() {
+        return positions.length * positions[0].length;
+    }
+
 
     @Override
     public String toString() {
@@ -31,32 +34,58 @@ public class Fridge {
     public Fridge() {
     }
 
-    public Fridge(byte[][] positions) {
-        this.positions = positions;
+    public Fridge(Fridge fridge) {
+        this.positions = new Fridge(fridge.getPositions()).getPositions();
+    }
+
+    Fridge(byte[][] positions) {
+        this.positions = new byte[positions.length][];
+
+        for (int x = 0; x < positions.length; x++) {
+            this.positions[x] = new byte[positions[0].length];
+            System.arraycopy(positions[x], 0, this.positions[x], 0, positions[0].length);
+        }
     }
 
 
-    public Fridge turnHandle(int x, int y) {
-        for (int i = 0; i < this.positions.length; i++) {
-            this.positions[x][i] *= -1;
-        }
-        for (int i = 0; i < this.positions[x].length; i++) {
-            this.positions[i][y] *= -1;
-        }
-        this.positions[x][y] *= -1;
+    Fridge turnHandle(int x, int y) {
 
-        return Fridge.this;
+        for (int i = 0; i < positions.length; i++) {
+            positions[i][x] *= -1;
+        }
+        for (int i = 0; i < positions[x].length; i++) {
+            positions[y][i] *= -1;
+        }
+        positions[y][x] *= -1;
+
+        return this;
     }
 
     public void setPositions(byte[][] positions) {
         this.positions = positions;
     }
 
-    public byte[][] getPositions() {
+    byte[][] getPositions() {
         return this.positions;
     }
 
-    public boolean isOpen() {
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        byte[][] otherFridgePos = ((Fridge) o).getPositions();
+
+        return Arrays.deepEquals(otherFridgePos, positions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(positions);
+    }
+
+    boolean isOpen() {
 
         for (byte[] yAxis : getPositions()) {
             for (byte handlerState : yAxis) {
@@ -66,6 +95,20 @@ public class Fridge {
             }
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        byte[][] positions = {{-1, -1, -1}, {-1, -1, -1}, {-1, -1, -1}};
+
+        Fridge fridge1 = new Fridge(positions);
+        Fridge fridge2 = new Fridge(positions);
+
+        System.out.println(fridge1 == fridge2);
+
+        System.out.println(fridge1);
+        System.out.println(fridge2.turnHandle(1, 0));
+        System.out.println(fridge1);
+        System.out.println(fridge2);
     }
 }
 
